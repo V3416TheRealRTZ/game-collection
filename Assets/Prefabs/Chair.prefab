@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000013152855102}
+  m_IsPrefabParent: 1
+--- !u!1 &1000013152855102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000011872290072}
+  - 212: {fileID: 212000012866977806}
+  - 60: {fileID: 60000013685393388}
+  m_Layer: 0
+  m_Name: Chair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000011872290072
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013152855102}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.19, y: -2.929, z: 0}
+  m_LocalScale: {x: 0.6029415, y: 0.47553968, z: 0.45181355}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!60 &60000013685393388
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013152855102}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 0.56618834, y: 0.5338516}
+      - {x: 0.5353653, y: 0.53823406}
+      - {x: 0.5353653, y: 0.56028354}
+      - {x: 0.5529886, y: 0.5564316}
+      - {x: -0.10192888, y: 0.54848146}
+      - {x: -0.11565886, y: 0.5523324}
+      - {x: -0.1038119, y: 0.56943446}
+      - {x: -0.13499999, y: 0.57}
+      - {x: -0.21499999, y: 0.48}
+      - {x: -0.13585958, y: 0.54204947}
+      - {x: -0.2849999, y: 0.3689399}
+      - {x: -0.29991773, y: 0.32819805}
+      - {x: -0.48229757, y: 0.16676527}
+      - {x: -0.5712707, y: 0.07639588}
+      - {x: -0.72024655, y: -0.048763186}
+      - {x: -0.655, y: 0.04}
+      - {x: -0.98499995, y: -0.29999998}
+      - {x: -0.98499995, y: -0.34}
+      - {x: -0.97499996, y: -0.35999998}
+      - {x: -0.805, y: -0.37}
+      - {x: -0.825, y: -0.84999996}
+      - {x: -0.825, y: -1.5}
+      - {x: -0.805, y: -1.52}
+      - {x: -0.705, y: -1.53}
+      - {x: -0.635, y: -1.53}
+      - {x: -0.59499997, y: -1.42}
+      - {x: -0.60499996, y: -1.01}
+      - {x: -0.60754156, y: -0.35353398}
+      - {x: -0.43110654, y: -0.3699998}
+      - {x: -0.4324589, y: -0.4820492}
+      - {x: -0.41872892, y: -0.4781982}
+      - {x: -0.3012701, y: -0.48229685}
+      - {x: -0.29262292, y: -0.3781981}
+      - {x: 0.185, y: -0.41}
+      - {x: 0.20008303, y: -0.49614856}
+      - {x: 0.225, y: -0.53999996}
+      - {x: 0.235, y: -1.51}
+      - {x: 0.255, y: -1.53}
+      - {x: 0.42499998, y: -1.53}
+      - {x: 0.445, y: -1.51}
+      - {x: 0.42315334, y: -0.398198}
+      - {x: 0.625, y: -0.39999998}
+--- !u!212 &212000012866977806
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013152855102}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 1
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 91459603f97a3c6429a10d3925ee6938, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
