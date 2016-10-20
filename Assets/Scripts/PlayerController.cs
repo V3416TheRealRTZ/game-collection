@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public float jumpStrenght = 700f;
     private Animator anim;
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
+        if (!isLocalPlayer)
+            return;
+
 	    float move = Input.GetAxis("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(move));
         rig.velocity = new Vector2(move * speed, rig.velocity.y);
@@ -63,4 +67,15 @@ public class PlayerController : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    public override void OnStartLocalPlayer()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+    }
+
+    /*void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+            Debug.Log("COLLISION");
+    }*/
 }

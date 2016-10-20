@@ -23,6 +23,7 @@ GameObject:
   - 95: {fileID: 95000012549953434}
   - 60: {fileID: 60000010389376064}
   - 50: {fileID: 50000013572857018}
+  - 114: {fileID: 114000010266910240}
   m_Layer: 0
   m_Name: rocketWithFire
   m_TagString: Untagged
@@ -145,6 +146,38 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010266910240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011898976470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 91
+    i1: 152
+    i2: 164
+    i3: 80
+    i4: 172
+    i5: 162
+    i6: 158
+    i7: 164
+    i8: 232
+    i9: 56
+    i10: 80
+    i11: 3
+    i12: 230
+    i13: 138
+    i14: 77
+    i15: 127
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212000013905897676
 SpriteRenderer:
   m_ObjectHideFlags: 1
