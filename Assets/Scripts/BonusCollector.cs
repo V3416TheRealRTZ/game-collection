@@ -7,6 +7,7 @@ public class BonusCollector : MonoBehaviour
 {
     private class Boost
     {
+        
         public string SendCommand { get; private set; }
         public float BoostingCoeff { get; private set; }
         public float RemainingTime { get; set; }
@@ -18,6 +19,7 @@ public class BonusCollector : MonoBehaviour
             RemainingTime = time;
         }
     }
+
     private List<Boost> _boosts;
     void Start()
     {

@@ -18,6 +18,7 @@ public class PlayerController : NetworkBehaviour
 	{
 	    anim = GetComponent<Animator>();
 	    rig = GetComponent<Rigidbody2D>();
+	    rig.inertia = 100f;
 	}
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -73,9 +74,18 @@ public class PlayerController : NetworkBehaviour
         GetComponent<SpriteRenderer>().color = Color.red;
     }
 
-    /*void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-            Debug.Log("COLLISION");
-    }*/
+        if (collision.gameObject.tag == "VietnamStar")
+        {
+            Vector2 vect = transform.position - collision.transform.position;
+            float xBoost = collision.gameObject.GetComponent<VietnamStarScript>().xBoost;
+            float yBoost = collision.gameObject.GetComponent<VietnamStarScript>().yBoost;
+            //rig.AddForce(new Vector2(vect.x * xBoost, vect.y * yBoost), ForceMode2D.Impulse);
+            vect.x = vect.x * xBoost;
+            vect.y = (vect.y + 0.125f) * yBoost;
+            rig.AddRelativeForce(vect);
+            //rig.velocity = new Vector2(vect.x * xBoost, vect.y * yBoost);
+        }
+    }
 }

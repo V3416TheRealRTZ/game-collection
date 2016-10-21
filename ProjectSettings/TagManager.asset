@@ -6,6 +6,8 @@ TagManager:
   tags:
   - JumpBooster
   - SpeedBooster
+  - Rocket
+  - VietnamStar
   layers:
   - Default
   - TransparentFX
