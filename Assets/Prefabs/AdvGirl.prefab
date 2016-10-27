@@ -234,6 +234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpStrenght: 700
+  maxSpeed: 30
+  minSpeed: 1.5
   speed: 5
   whatIsGround:
     serializedVersion: 2

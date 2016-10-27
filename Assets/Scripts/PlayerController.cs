@@ -6,6 +6,9 @@ public class PlayerController : NetworkBehaviour
 {
     public float jumpStrenght = 700f;
     private Animator anim;
+    public float maxSpeed = 30f;
+    public float minSpeed = 1.5f;
+    private float realSpeed;
     public float speed = 10f;
     private Rigidbody2D rig;
     private bool facedRight = true;
@@ -13,12 +16,14 @@ public class PlayerController : NetworkBehaviour
     public float groundRadius = 0.2f;
     public bool grounded = false;
     public Transform groundCheck;
+
 	// Use this for initialization
 	void Start ()
 	{
 	    anim = GetComponent<Animator>();
 	    rig = GetComponent<Rigidbody2D>();
 	    rig.inertia = 100f;
+	    realSpeed = speed;
 	}
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -43,12 +48,35 @@ public class PlayerController : NetworkBehaviour
 
     void BoostSpeed(float boost)
     {
-        speed *= boost;
+        realSpeed *= boost;
+        if (realSpeed > maxSpeed)
+        {
+            speed = maxSpeed;
+            return;
+        }
+        if (realSpeed < minSpeed)
+        {
+            speed = minSpeed;
+            return;
+        }
+        speed = realSpeed;
+
     }
 
     void UnboostSpeed(float boost)
     {
-        speed /= boost;
+        realSpeed /= boost;
+        if (realSpeed > maxSpeed)
+        {
+            speed = maxSpeed;
+            return;
+        }
+        if (realSpeed < minSpeed)
+        {
+            speed = minSpeed;
+            return;
+        }
+        speed = realSpeed;
     }
 
     void BoostJump(float boost)
@@ -84,7 +112,8 @@ public class PlayerController : NetworkBehaviour
             //rig.AddForce(new Vector2(vect.x * xBoost, vect.y * yBoost), ForceMode2D.Impulse);
             vect.x = vect.x * xBoost;
             vect.y = (vect.y + 0.125f) * yBoost;
-            rig.AddRelativeForce(vect);
+            //rig.AddRelativeForce(vect);
+            rig.AddForceAtPosition(vect, collision.transform.position);
             //rig.velocity = new Vector2(vect.x * xBoost, vect.y * yBoost);
         }
     }
