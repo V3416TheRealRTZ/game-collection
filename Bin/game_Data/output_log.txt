@@ -2,12 +2,12 @@ Mono path[0] = 'D:/documents/Unity projects/Games/GameCollection/Bin/game_Data/M
 Mono path[1] = 'D:/documents/Unity projects/Games/GameCollection/Bin/game_Data/Mono'
 Mono config path = 'D:/documents/Unity projects/Games/GameCollection/Bin/game_Data/Mono/etc'
 PlayerConnection initialized from D:/documents/Unity projects/Games/GameCollection/Bin/game_Data (debug = 0)
-PlayerConnection initialized network socket : 0.0.0.0 55341
-Broadcasting "[IP] 169.254.80.80 [Port] 55341 [Flags] 3 [Guid] 387641483 [EditorId] 346353317 [Version] 1048832 [Id] WindowsPlayer(PAVEL-PC) [Debug] 1" to [169.254.255.255:54997]...
-Waiting for connection from host on [169.254.80.80:55341]...
-PlayerConnection accepted from [169.254.80.80] handle:0x334
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=0.0.0.0:56483
-PlayerConnection already initialized - listening to [169.254.80.80:55341]
+PlayerConnection initialized network socket : 0.0.0.0 55390
+Broadcasting "[IP] 169.254.80.80 [Port] 55390 [Flags] 3 [Guid] 1652254055 [EditorId] 4014405794 [Version] 1048832 [Id] WindowsPlayer(PAVEL-PC) [Debug] 1" to [169.254.255.255:54997]...
+Waiting for connection from host on [169.254.80.80:55390]...
+Timed out. Continuing without host connection.
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=0.0.0.0:56055
+PlayerConnection already initialized - listening to [169.254.80.80:55390]
 Initialize engine version: 5.4.1f1 (649f48bbbf0f)
 GfxDevice: creating device client; threaded=1
 Direct3D:
@@ -24,10 +24,9 @@ Platform assembly: D:\documents\Unity projects\Games\GameCollection\Bin\game_Dat
 Loading D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.149 seconds
+- Completed reload, in  0.460 seconds
 Platform assembly: D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 60Hz; virtual: 4480x1440 at 0,0
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Waiting for finish
