@@ -16,7 +16,7 @@ public class PlayerController : Photon.PunBehaviour
     public bool grounded = false;
     public Transform groundCheck;
 
-    void Start ()
+    void Start(){
         anim = GetComponent<Animator>();
 	    rig = GetComponent<Rigidbody2D>();
 	    rig.inertia = 100f;
