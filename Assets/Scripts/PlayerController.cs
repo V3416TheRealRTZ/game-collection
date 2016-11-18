@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerController : Photon.PunBehaviour
 {
     public float jumpStrenght = 700f;
     private Animator anim;
@@ -17,19 +16,20 @@ public class PlayerController : NetworkBehaviour
     public bool grounded = false;
     public Transform groundCheck;
 
-	// Use this for initialization
-	void Start ()
-	{
-	    anim = GetComponent<Animator>();
+    void Start(){
+        anim = GetComponent<Animator>();
 	    rig = GetComponent<Rigidbody2D>();
 	    rig.inertia = 100f;
 	    realSpeed = speed;
 	}
+
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
-        if (!isLocalPlayer)
+        if (photonView.isMine == false && PhotonNetwork.connected == true)
+        {
             return;
+        }
 
 	    float move = Input.GetAxis("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(move));
@@ -97,10 +97,10 @@ public class PlayerController : NetworkBehaviour
         transform.localScale = scale;
     }
 
-    public override void OnStartLocalPlayer()
-    {
-        GetComponent<SpriteRenderer>().color = Color.red;
-    }
+    // public override void OnStartLocalPlayer()
+    // {
+    //     GetComponent<SpriteRenderer>().color = Color.red;
+    // }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
