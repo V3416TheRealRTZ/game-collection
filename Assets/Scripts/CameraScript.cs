@@ -9,6 +9,12 @@ public class CameraScript : MonoBehaviour
     public Transform target;
 	
 	// Update is called once per frame
+
+    public void setTarget(Transform _target)
+    {
+        target = _target;
+    }
+
 	void Update ()
     {
 	    if (target)
