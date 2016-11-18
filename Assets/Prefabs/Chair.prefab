@@ -23,7 +23,7 @@ GameObject:
   - 60: {fileID: 60000013685393388}
   m_Layer: 0
   m_Name: Chair
-  m_TagString: Untagged
+  m_TagString: DeceleratingBarrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,8 +34,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013152855102}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.19, y: -2.929, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.415237, y: -2.929, z: 0}
   m_LocalScale: {x: 0.6029415, y: 0.47553968, z: 0.45181355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []

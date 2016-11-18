@@ -7,6 +7,7 @@ public class BonusCollector : MonoBehaviour
 {
     private class Boost
     {
+        
         public string SendCommand { get; private set; }
         public float BoostingCoeff { get; private set; }
         public float RemainingTime { get; set; }
@@ -58,6 +59,15 @@ public class BonusCollector : MonoBehaviour
             float timeOfAction = col.GetComponent<BoostProperties>().time;
             gameObject.SendMessage("BoostJump", coefficient);
             _boosts.Add(new Boost("UnboostJump", coefficient, timeOfAction));
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "DeceleratingBarrier")
+        {
+            gameObject.SendMessage("BoostSpeed", 0.5);
+            _boosts.Add(new Boost("UnboostSpeed", 0.5f, 5.0f));
         }
     }
 }
