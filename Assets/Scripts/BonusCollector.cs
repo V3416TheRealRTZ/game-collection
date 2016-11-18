@@ -7,7 +7,6 @@ public class BonusCollector : MonoBehaviour
 {
     private class Boost
     {
-        
         public string SendCommand { get; private set; }
         public float BoostingCoeff { get; private set; }
         public float RemainingTime { get; set; }
@@ -19,7 +18,9 @@ public class BonusCollector : MonoBehaviour
             RemainingTime = time;
         }
     }
+
     private List<Boost> _boosts;
+    
     void Start()
     {
         _boosts = new List<Boost>();
@@ -59,6 +60,11 @@ public class BonusCollector : MonoBehaviour
             float timeOfAction = col.GetComponent<BoostProperties>().time;
             gameObject.SendMessage("BoostJump", coefficient);
             _boosts.Add(new Boost("UnboostJump", coefficient, timeOfAction));
+        }
+        if (col.GetComponent<PolygonCollider2D>().tag == "MoneyBonus")
+        {
+            Destroy(col.gameObject);
+
         }
     }
 
