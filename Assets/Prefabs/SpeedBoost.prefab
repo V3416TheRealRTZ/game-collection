@@ -22,7 +22,7 @@ GameObject:
   - 212: {fileID: 212000011425860400}
   - 60: {fileID: 60000014155980134}
   - 114: {fileID: 114000012255429580}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpeedBoost
   m_TagString: SpeedBooster
   m_Icon: {fileID: 0}
@@ -35,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012180854302}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1964288, y: -2.6689558, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -27.94764, y: -8.901592, z: 2.484375}
   m_LocalScale: {x: 0.13787836, y: 0.124726094, z: 0.2542251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []

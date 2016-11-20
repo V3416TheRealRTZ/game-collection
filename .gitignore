@@ -5,6 +5,7 @@
 [Oo]bj/
 [Bb]uild
 /[Ll]ibrary/
+/[Bi]n/
 sysinfo.txt
 *.stackdump
 *.exe

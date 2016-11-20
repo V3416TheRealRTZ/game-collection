@@ -10,6 +10,8 @@ TagManager:
   - VietnamStar
   - DeceleratingBarrier
   - MoneyBonus
+  - Coin
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - 
   - 
   - player
-  - 
+  - Bonus
   - 
   - 
   - 

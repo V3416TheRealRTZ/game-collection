@@ -31,6 +31,8 @@ GameObject:
   - 114: {fileID: 114000013961306258}
   - 114: {fileID: 114000013051716902}
   - 114: {fileID: 114000013596551354}
+  - 114: {fileID: 114000010556545970}
+  - 114: {fileID: 114000011097328490}
   m_Layer: 8
   m_Name: AdvGirl
   m_TagString: Player
@@ -154,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpStrenght: 700
+  maxSpeed: 30
+  minSpeed: 1.5
   speed: 5
   whatIsGround:
     serializedVersion: 2
@@ -161,6 +165,19 @@ MonoBehaviour:
   groundRadius: 0.1
   grounded: 0
   groundCheck: {fileID: 4000011636250996}
+--- !u!114 &114000010556545970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010441401640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9540f3f97b09941bd1c682c110f64e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scores: 0
+  Rocks: 0
 --- !u!114 &114000011044310462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,6 +205,18 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
+--- !u!114 &114000011097328490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010441401640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b82f9281205b945a20903639b7d9a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rock: {fileID: 1000011065498766, guid: 56c4876800da1c34dbd88179bf821a80, type: 2}
 --- !u!114 &114000011124216028
 MonoBehaviour:
   m_ObjectHideFlags: 1
