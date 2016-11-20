@@ -2,12 +2,12 @@ Mono path[0] = 'D:/documents/Unity projects/Games/GameCollection/Bin/game_Data/M
 Mono path[1] = 'D:/documents/Unity projects/Games/GameCollection/Bin/game_Data/Mono'
 Mono config path = 'D:/documents/Unity projects/Games/GameCollection/Bin/game_Data/Mono/etc'
 PlayerConnection initialized from D:/documents/Unity projects/Games/GameCollection/Bin/game_Data (debug = 0)
-PlayerConnection initialized network socket : 0.0.0.0 55022
-Broadcasting "[IP] 169.254.80.80 [Port] 55022 [Flags] 3 [Guid] 2679221944 [EditorId] 1404013378 [Version] 1048832 [Id] WindowsPlayer(PAVEL-PC) [Debug] 1" to [169.254.255.255:54997]...
-Waiting for connection from host on [169.254.80.80:55022]...
-PlayerConnection accepted from [169.254.80.80] handle:0x2c8
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=0.0.0.0:56944
-PlayerConnection already initialized - listening to [169.254.80.80:55022]
+PlayerConnection initialized network socket : 0.0.0.0 55192
+Broadcasting "[IP] 169.254.80.80 [Port] 55192 [Flags] 3 [Guid] 268439972 [EditorId] 1404013378 [Version] 1048832 [Id] WindowsPlayer(PAVEL-PC) [Debug] 1" to [169.254.255.255:54997]...
+Waiting for connection from host on [169.254.80.80:55192]...
+PlayerConnection accepted from [169.254.80.80] handle:0x350
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=0.0.0.0:56972
+PlayerConnection already initialized - listening to [169.254.80.80:55192]
 Initialize engine version: 5.4.1f1 (649f48bbbf0f)
 GfxDevice: creating device client; threaded=1
 Direct3D:
@@ -28,10 +28,187 @@ Platform assembly: D:\documents\Unity projects\Games\GameCollection\Bin\game_Dat
 Loading D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.060 seconds
+- Completed reload, in  0.286 seconds
 Platform assembly: D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\documents\Unity projects\Games\GameCollection\Bin\game_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 4480x1440 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.047705 ms
+SwitchToProtocol: Udp PhotonNetwork.connected: False
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+PhotonNetwork:SwitchToProtocol(ConnectionProtocol) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:1172)
+PhotonNetwork:ConnectUsingSettings(String) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:1219)
+Launcher:Connect() (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\Launcher.cs:45)
+UnityEngine.Events.InvokableCall:Invoke(Object[]) (at C:\buildslave\unity\build\Runtime\Export\UnityEvent.cs:153)
+UnityEngine.Events.InvokableCallList:Invoke(Object[]) (at C:\buildslave\unity\build\Runtime\Export\UnityEvent.cs:630)
+UnityEngine.Events.UnityEventBase:Invoke(Object[]) (at C:\buildslave\unity\build\Runtime\Export\UnityEvent.cs:765)
+UnityEngine.Events.UnityEvent:Invoke() (at C:\buildslave\unity\build\Runtime\Export\UnityEvent_0.cs:53)
+UnityEngine.UI.Button:Press() (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\UI\Core\Button.cs:35)
+UnityEngine.UI.Button:OnPointerClick(PointerEventData) (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\UI\Core\Button.cs:44)
+UnityEngine.EventSystems.ExecuteEvents:Execute(IPointerClickHandler, BaseEventData) (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\EventSystem\ExecuteEvents.cs:52)
+UnityEngine.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1) (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\EventSystem\ExecuteEvents.cs:269)
+UnityEngine.EventSystems.StandaloneInputModule:ProcessMousePress(MouseButtonEventData) (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\EventSystem\InputModules\StandaloneInputModule.cs:523)
+UnityEngine.EventSystems.StandaloneInputModule:ProcessMouseEvent(Int32) (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\EventSystem\InputModules\StandaloneInputModule.cs:422)
+UnityEngine.EventSystems.StandaloneInputModule:ProcessMouseEvent() (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\EventSystem\InputModules\StandaloneInputModule.cs:410)
+UnityEngine.EventSystems.StandaloneInputModule:Process() (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\EventSystem\InputModules\StandaloneInputModule.cs:184)
+UnityEngine.EventSystems.EventSystem:Update() (at C:\buildslave\unity\build\Extensions\guisystem\UnityEngine.UI\EventSystem\EventSystem.cs:277)
+ 
+(Filename: D:/documents/Unity projects/Games/GameCollection/Assets/Photon Unity Networking/Plugins/PhotonNetwork/PhotonNetwork.cs Line: 1172)
+
+Joined to Lobby
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+Launcher:OnJoinedLobby() (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\Launcher.cs:68)
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+NetworkingPeer:SendMonoMessage(PhotonNetworkingMessage, Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:2601)
+NetworkingPeer:OnOperationResponse(OperationResponse) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1838)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:156)
+ 
+(Filename: D:/documents/Unity projects/Games/GameCollection/Assets/Scripts/Launcher.cs Line: 68)
+
+Operation failed: OperationResponse 225: ReturnCode: 32760 (No match found). Parameters: {}
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:LogWarning(Object)
+NetworkingPeer:OnOperationResponse(OperationResponse) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1528)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:156)
+ 
+(Filename: D:/documents/Unity projects/Games/GameCollection/Assets/Photon Unity Networking/Plugins/PhotonNetwork/NetworkingPeer.cs Line: 1528)
+
+OnPhotonRandomJoinFailed
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+Launcher:OnPhotonRandomJoinFailed(Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\Launcher.cs:74)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.MonoType:InvokeMember(String, BindingFlags, Binder, Object, Object[], ParameterModifier[], CultureInfo, String[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/MonoType.cs:433)
+UnityEngine.SetupCoroutine:InvokeMember(Object, String, Object) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:31)
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+NetworkingPeer:SendMonoMessage(PhotonNetworkingMessage, Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:2601)
+NetworkingPeer:OnOperationResponse(OperationResponse) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1824)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:156)
+ 
+(Filename: /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs Line: 222)
+
+room94
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+Launcher:OnPhotonRandomJoinFailed(Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\Launcher.cs:82)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.MonoType:InvokeMember(String, BindingFlags, Binder, Object, Object[], ParameterModifier[], CultureInfo, String[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System/MonoType.cs:433)
+UnityEngine.SetupCoroutine:InvokeMember(Object, String, Object) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:31)
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+NetworkingPeer:SendMonoMessage(PhotonNetworkingMessage, Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:2601)
+NetworkingPeer:OnOperationResponse(OperationResponse) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:1824)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:156)
+ 
+(Filename: /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs Line: 222)
+
+OnJoinedRoom start scene
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+Launcher:OnJoinedRoom() (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\Launcher.cs:88)
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+NetworkingPeer:SendMonoMessage(PhotonNetworkingMessage, Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:2601)
+NetworkingPeer:OnEvent(EventData) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:2342)
+ExitGames.Client.Photon.PeerBase:DeserializeMessageAndCallback(Byte[])
+ExitGames.Client.Photon.EnetPeer:DispatchIncomingCommands()
+ExitGames.Client.Photon.PhotonPeer:DispatchIncomingCommands()
+PhotonHandler:Update() (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonHandler.cs:156)
+ 
+(Filename: D:/documents/Unity projects/Games/GameCollection/Assets/Scripts/Launcher.cs Line: 88)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.558966 ms
+System memory in use before: 137.2 MB.
+System memory in use after: 137.2 MB.
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 560.
+Total: 0.429772 ms (FindLiveObjects: 0.036776 ms CreateObjectMapping: 0.022237 ms MarkObjects: 0.346384 ms  DeleteObjects: 0.015394 ms)
+
+Start game scene
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+GameManager:Start() (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\GameManager.cs:14)
+ 
+(Filename: D:/documents/Unity projects/Games/GameCollection/Assets/Scripts/GameManager.cs Line: 14)
+
+The referenced script on this Behaviour (Game Object 'AdvGirl') is missing!
+UnityEngine.Resources:Load(String, Type)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32, Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:2439)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:2415)
+GameManager:Start() (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\GameManager.cs:17)
+
+[C:/buildslave/unity/build/Runtime/Mono/MonoBehaviour.cpp line 1656] 
+(Filename: D:/documents/Unity projects/Games/GameCollection/Assets/Photon Unity Networking/Plugins/PhotonNetwork/PhotonNetwork.cs Line: 2439)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\UnityEngineObjectBindings.gen.cs:54)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion) (at C:\buildslave\unity\build\Runtime\Export\UnityEngineObject.cs:144)
+NetworkingPeer:DoInstantiate(Hashtable, PhotonPlayer, GameObject) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:3068)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32, Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:2471)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:2415)
+GameManager:Start() (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\GameManager.cs:17)
+
+[C:/buildslave/unity/build/Runtime/Mono/MonoBehaviour.cpp line 1656] 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineObjectBindings.gen.cs Line: 54)
+
+The referenced script on this Behaviour (Game Object 'AdvGirl') is missing!
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\UnityEngineObjectBindings.gen.cs:54)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion) (at C:\buildslave\unity\build\Runtime\Export\UnityEngineObject.cs:144)
+NetworkingPeer:DoInstantiate(Hashtable, PhotonPlayer, GameObject) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:3068)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32, Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:2471)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:2415)
+GameManager:Start() (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\GameManager.cs:17)
+
+[C:/buildslave/unity/build/Runtime/Mono/MonoBehaviour.cpp line 1656] 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineObjectBindings.gen.cs Line: 54)
+
+The referenced script on this Behaviour (Game Object 'AdvGirl') is missing!
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\UnityEngineObjectBindings.gen.cs:54)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion) (at C:\buildslave\unity\build\Runtime\Export\UnityEngineObject.cs:144)
+NetworkingPeer:DoInstantiate(Hashtable, PhotonPlayer, GameObject) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\NetworkingPeer.cs:3068)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32, Object[]) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:2471)
+PhotonNetwork:Instantiate(String, Vector3, Quaternion, Int32) (at D:\documents\Unity projects\Games\GameCollection\Assets\Photon Unity Networking\Plugins\PhotonNetwork\PhotonNetwork.cs:2415)
+GameManager:Start() (at D:\documents\Unity projects\Games\GameCollection\Assets\Scripts\GameManager.cs:17)
+
+[C:/buildslave/unity/build/Runtime/Mono/MonoBehaviour.cpp line 1656] 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineObjectBindings.gen.cs Line: 54)
+
+UnloadTime: 0.913000 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 3c40 -> priority: 1 
+  Thread -> id: 980 -> priority: 1 
 Waiting for finish
