@@ -12,6 +12,7 @@ TagManager:
   - MoneyBonus
   - Coin
   - Rock
+  - Shield
   layers:
   - Default
   - TransparentFX

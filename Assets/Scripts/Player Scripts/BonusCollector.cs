@@ -21,6 +21,7 @@ public class BonusCollector : MonoBehaviour
     private float _rockTime;
     private float _moneyBonusTime;
     private float _moneyCoeff;
+    private float _shieldTime;
     private List<Boost> _boosts;
     private PlayerStatistics _stats;
     private PlayerActivities _activs;
@@ -30,6 +31,7 @@ public class BonusCollector : MonoBehaviour
         _boosts = new List<Boost>();
         _moneyBonusTime = 0;
         _rockTime = 0;
+        _shieldTime = 0;
         _stats = GetComponent<PlayerStatistics>();
         _activs = GetComponent<PlayerActivities>();
     }
@@ -56,8 +58,11 @@ public class BonusCollector : MonoBehaviour
         if (_rockTime > 0)
             _rockTime -= Time.deltaTime;
         else
-            //SendMessage("SetRocks", rocks);
             _stats.Rocks = 0;
+        if (_shieldTime > 0)
+            _shieldTime -= Time.deltaTime;
+        else
+            _stats.IsImmortaled = false;
 	}
 
     void OnTriggerEnter2D(Collider2D col)
@@ -98,11 +103,18 @@ public class BonusCollector : MonoBehaviour
             _stats.Rocks = (int)col.GetComponent<BoostProperties>().boostCoefficient;
             Destroy(col.gameObject);
         }
+
+        if (col.tag == "Shield")
+        {
+            _shieldTime = col.GetComponent<BoostProperties>().time;
+            _stats.IsImmortaled = true;
+            Destroy(col.gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "DeceleratingBarrier")
+        if ((collision.gameObject.tag == "DeceleratingBarrier") && !_stats.IsImmortaled)
         {
             gameObject.SendMessage("BoostSpeed", 0.5);
             _boosts.Add(new Boost("UnboostSpeed", 0.5f, 5.0f));

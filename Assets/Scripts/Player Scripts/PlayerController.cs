@@ -20,7 +20,7 @@ public class PlayerController : Photon.PunBehaviour
     {
         anim = GetComponent<Animator>();
 	    rig = GetComponent<Rigidbody2D>();
-	    rig.inertia = 100f;
+        rig.inertia = 100f;
 	    realSpeed = speed;
 	}
 
