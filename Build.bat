@@ -1,0 +1,1 @@
+"Build project.bat" "%CD%"

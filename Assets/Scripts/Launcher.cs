@@ -87,7 +87,7 @@ public class Launcher : Photon.PunBehaviour
         base.OnJoinedRoom();
         Debug.Log("OnJoinedRoom start scene");
         //SceneManager.LoadScene("RunnerGame");    
-        PhotonNetwork.LoadLevel("RunnerGame");
+        PhotonNetwork.LoadLevel("2 RunnerGame");
     }
 
     public override void OnLeftRoom()
