@@ -11,6 +11,7 @@ public class BonusCollector : MonoBehaviour
         public float BoostingCoeff { get; private set; }
         public float RemainingTime { get; set; }
 
+
         public Boost(string command, float coefficient, float time)
         {
             SendCommand = command;
@@ -19,6 +20,7 @@ public class BonusCollector : MonoBehaviour
         }
     }
     private float _rockTime;
+    private float _magnetTime;
     private float _moneyBonusTime;
     private float _moneyCoeff;
     private float _shieldTime;
@@ -63,6 +65,12 @@ public class BonusCollector : MonoBehaviour
             _shieldTime -= Time.deltaTime;
         else
             _stats.IsImmortaled = false;
+        if (_magnetTime > 0)
+        {
+            _magnetTime -= Time.deltaTime;
+        }
+        else
+            _stats.IsMagnetActive = false;
 	}
 
     void OnTriggerEnter2D(Collider2D col)
@@ -108,6 +116,13 @@ public class BonusCollector : MonoBehaviour
         {
             _shieldTime = col.GetComponent<BoostProperties>().time;
             _stats.IsImmortaled = true;
+            Destroy(col.gameObject);
+        }
+
+        if (col.tag == "Magnet")
+        {
+            _magnetTime = col.GetComponent<BoostProperties>().time;
+            _stats.IsMagnetActive = true;
             Destroy(col.gameObject);
         }
     }

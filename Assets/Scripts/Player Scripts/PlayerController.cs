@@ -4,17 +4,18 @@ using System.Collections;
 public class PlayerController : Photon.PunBehaviour
 {
     public float jumpStrenght = 700f;
-    private Animator anim;
+    Animator anim;
     public float maxSpeed = 30f;
     public float minSpeed = 1.5f;
-    private float realSpeed;
+    float realSpeed;
     public float speed = 10f;
-    private Rigidbody2D rig;
-    private bool facedRight = true;
+    Rigidbody2D rig;
+    bool facedRight = true;
     public LayerMask whatIsGround;
     public float groundRadius = 0.2f;
-    public bool grounded = false;
+    bool grounded = false;
     public Transform groundCheck;
+    
 
     void Start()
     {

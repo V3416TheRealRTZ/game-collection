@@ -5,6 +5,8 @@ public class PlayerStatistics : MonoBehaviour {
     public int Scores { get; set; }
     public int Rocks { get; set; }
     public bool IsImmortaled { get; set; }
+    public bool IsMagnetActive { get; set; }
+
 
     void Start()
     {

@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.IO;
 using System.Linq;
+using System;
 
 
 [assembly: System.Reflection.AssemblyVersion("1.0.*")]
@@ -11,9 +12,11 @@ public class Build
     [MenuItem("MyTools/Win32 Build")]
     private static void BuildWin32()
     {
+        string projDir = Environment.CurrentDirectory;
         string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-        string path = "\\Builds\\Build ver " + version;
-        var files = Directory.GetFiles("\\Assets\\Scenes");
+        string path = projDir + "\\Builds\\Build ver " + version;
+        Debug.Log(projDir);
+        var files = Directory.GetFiles(projDir + "\\Assets\\Scenes");
         var levels = files
                      .Where(fileName => !fileName.Contains(".meta"))
                      .Select(fileName => fileName)

@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000010441401640}
   m_IsPrefabParent: 1
+--- !u!1 &1000010240718994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000014076140646}
+  m_Layer: 8
+  m_Name: coinsGrab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000010441401640
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,13 +90,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010441401640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.94, y: -2.19, z: -0.5}
+  m_LocalPosition: {x: 9.755251, y: -2.150524, z: -0.5}
   m_LocalScale: {x: 0.27212486, y: 0.27212486, z: 0.27212486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000011636250996}
+  - {fileID: 4000014076140646}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &4000014076140646
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010240718994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012923731824}
+  m_RootOrder: 1
 --- !u!50 &50000014057437280
 Rigidbody2D:
   serializedVersion: 2
@@ -176,8 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9540f3f97b09941bd1c682c110f64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scores: 0
-  Rocks: 0
 --- !u!114 &114000011044310462
 MonoBehaviour:
   m_ObjectHideFlags: 1
