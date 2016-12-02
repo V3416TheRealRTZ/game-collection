@@ -22,7 +22,7 @@ public class GameManager : Photon.PunBehaviour {
 
     public override void OnLeftRoom()
     {
-        SceneManager.LoadScene("StartGame");
+        SceneManager.LoadScene("1 StartGame");
     }
 
     public void LeaveRoom()

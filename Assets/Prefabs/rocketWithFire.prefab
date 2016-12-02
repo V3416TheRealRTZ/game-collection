@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010635626972}
   - 212: {fileID: 212000013905897676}
-  - 95: {fileID: 95000012549953434}
   - 60: {fileID: 60000010389376064}
   - 50: {fileID: 50000013572857018}
   - 114: {fileID: 114000010266910240}
   - 114: {fileID: 114000011291421550}
   - 255: {fileID: 255000014269445840}
+  - 95: {fileID: 95000012356527022}
   m_Layer: 0
   m_Name: rocketWithFire
   m_TagString: Rocket
@@ -67,8 +67,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011898976470}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.888524, y: -0.9609309, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -59.148243, y: -5.9206076, z: -4}
   m_LocalScale: {x: 0.5218065, y: 0.5218065, z: 0.5218065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -160,7 +160,7 @@ PolygonCollider2D:
       - {x: -1.3508404, y: -0.36909357}
       - {x: -1.3399999, y: -0.39777038}
       - {x: -1.186506, y: -0.39331114}
---- !u!95 &95000012549953434
+--- !u!95 &95000012356527022
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -273,6 +273,6 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -1.888524, y: -0.9609309}
+  m_ConnectedAnchor: {x: 23.2, y: 3.29}
   m_DampingRatio: 0
   m_Frequency: 0
