@@ -22,14 +22,13 @@ public class Build
                      .Select(fileName => fileName)
                      .ToArray();
         BuildPipeline.BuildPlayer(levels, path + "\\BuiltGame ver " + version + ".exe", BuildTarget.StandaloneWindows, BuildOptions.Development);
-        using (var reader = new StreamReader(projDir + "\\.git\\FETCH_HEAD"))
         using (var writer = new StreamWriter(path + "\\build info.txt"))
         {
-            string str = reader.ReadLine();
-            str = str.Split(new char[] { '\t', ' ' }).First();
-            Debug.Log(str);
             writer.WriteLine("build version: " + version);
-            writer.WriteLine("commit hash: " + str);
+        }
+        using (var writer = new StreamWriter(projDir + "\\last ver.txt"))
+        {
+            writer.WriteLine(version);
         }
         Debug.Log(version);
     }
