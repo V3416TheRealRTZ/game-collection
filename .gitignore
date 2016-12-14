@@ -4,6 +4,8 @@
 /Temp/
 /Library/
 /Bin/
+/run_Data/
+run.exe
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #

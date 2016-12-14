@@ -15,15 +15,22 @@ public class PlayerController : Photon.PunBehaviour
     public float groundRadius = 0.2f;
     bool grounded = false;
     public Transform groundCheck;
-    
+
 
     void Start()
     {
         anim = GetComponent<Animator>();
-	    rig = GetComponent<Rigidbody2D>();
+        rig = GetComponent<Rigidbody2D>();
         rig.inertia = 100f;
-	    realSpeed = speed;
-	}
+        realSpeed = speed;
+        if (!photonView.isMine)
+        {
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            GetComponent<CircleCollider2D>().isTrigger = true;
+            GetComponent<Rigidbody2D>().isKinematic = true;
+        }
+
+    }
 
 	void FixedUpdate()
 	{

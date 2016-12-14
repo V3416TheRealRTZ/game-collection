@@ -192,7 +192,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967039
   groundRadius: 0.1
-  grounded: 0
   groundCheck: {fileID: 4000011636250996}
 --- !u!114 &114000010556545970
 MonoBehaviour:
