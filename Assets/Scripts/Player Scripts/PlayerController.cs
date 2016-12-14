@@ -29,15 +29,12 @@ public class PlayerController : Photon.PunBehaviour
             GetComponent<CircleCollider2D>().isTrigger = true;
             GetComponent<Rigidbody2D>().isKinematic = true;
         }
-
     }
 
 	void FixedUpdate()
 	{
         if (photonView.isMine == false && PhotonNetwork.connected == true)
-        {
             return;
-        }
 
 	    float move = Input.GetAxis("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(move));
@@ -49,14 +46,10 @@ public class PlayerController : Photon.PunBehaviour
         else if (move > 0 && !facedRight)
             Flip();
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
-	    {
 	        rig.AddForce(new Vector2(0, jumpStrenght));
-	    }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
             SendMessage("ThrowRock");
-        }
 
 	}
 

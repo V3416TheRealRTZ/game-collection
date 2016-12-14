@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RockBehavior : MonoBehaviour
+public class RockBehavior : Photon.PunBehaviour
 {
     public LayerMask objects;
     private bool collided;
@@ -13,7 +13,8 @@ public class RockBehavior : MonoBehaviour
         collided = Physics2D.OverlapCircle(objectCheck.position, groundRadius, objects);
         if (collided)
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
+            //Destroy(gameObject);
             //Debug.Assert(collided);
         }
 	}

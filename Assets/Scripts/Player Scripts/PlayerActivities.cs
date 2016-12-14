@@ -12,7 +12,8 @@ public class PlayerActivities : MonoBehaviour {
         if (gameObject.GetComponent<PlayerStatistics>().Rocks > 0)
         {
             --gameObject.GetComponent<PlayerStatistics>().Rocks;
-            newRock = (GameObject)Instantiate(rock, transform.position, transform.rotation);
+            //newRock = (GameObject)Instantiate(rock, transform.position, transform.rotation);
+            newRock = PhotonNetwork.InstantiateSceneObject("PropellingRock", transform.position, transform.rotation, 0, null);
         }
         else
             return;
