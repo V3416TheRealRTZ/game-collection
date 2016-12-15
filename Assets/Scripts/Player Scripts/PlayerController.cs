@@ -23,7 +23,7 @@ public class PlayerController : Photon.PunBehaviour
         rig = GetComponent<Rigidbody2D>();
         rig.inertia = 100f;
         realSpeed = speed;
-        if (!photonView.isMine)
+        if (!photonView.isMine && PhotonNetwork.room != null)
         {
             GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<CircleCollider2D>().isTrigger = true;
@@ -33,7 +33,7 @@ public class PlayerController : Photon.PunBehaviour
 
 	void FixedUpdate()
 	{
-        if (photonView.isMine == false && PhotonNetwork.connected == true)
+        if (photonView.isMine == false && PhotonNetwork.room != null)
             return;
 
 	    float move = Input.GetAxis("Horizontal");
