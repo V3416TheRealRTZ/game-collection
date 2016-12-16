@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using PlayFab;
 using PlayFab.ClientModels;
+using System.Collections.Generic;
 
 public class Register : MonoBehaviour {
 
@@ -41,6 +42,12 @@ public class Register : MonoBehaviour {
 
     void OnRegisterCallback(RegisterPlayFabUserResult result)
     {
+        PlayerPrefs.SetString("PlayFabId", result.PlayFabId);
+        PlayerPrefs.SetString("SessionTicket", result.SessionTicket);
+        PlayerPrefs.SetString("DisplayName", _usernameField.text);
+        PlayerPrefs.SetString("Username", result.Username);
+
+
         Debug.Log(string.Format("Register Successful. Welcome Player: {0}!", result.PlayFabId));
         Debug.Log(string.Format("Your session ticket is: {0}", result.SessionTicket));
         Loading.Load(LoadingScene.Lobby);
