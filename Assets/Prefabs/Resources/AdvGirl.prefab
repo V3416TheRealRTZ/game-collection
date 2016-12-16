@@ -193,6 +193,8 @@ MonoBehaviour:
     m_Bits: 4294967039
   groundRadius: 0.1
   groundCheck: {fileID: 4000011636250996}
+  PlayerUiPrefab: {fileID: 1000014137059422, guid: 9b36cf7d247490949b1fca68aab8985d,
+    type: 2}
 --- !u!114 &114000010556545970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,7 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b82f9281205b945a20903639b7d9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rock: {fileID: 1000011065498766, guid: 56c4876800da1c34dbd88179bf821a80, type: 2}
 --- !u!114 &114000011124216028
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -16,6 +16,8 @@ public class PlayerController : Photon.PunBehaviour
     bool grounded = false;
     public Transform groundCheck;
 
+    public GameObject PlayerUiPrefab;
+
 
     void Start()
     {
@@ -28,6 +30,16 @@ public class PlayerController : Photon.PunBehaviour
             GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<CircleCollider2D>().isTrigger = true;
             GetComponent<Rigidbody2D>().isKinematic = true;
+        }
+
+        if (PlayerUiPrefab != null)
+        {
+            GameObject _uiGo = Instantiate(PlayerUiPrefab) as GameObject;
+            _uiGo.GetComponent<PlayerUI>().setTarget(this);
+        }
+        else
+        {
+            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
         }
     }
 
