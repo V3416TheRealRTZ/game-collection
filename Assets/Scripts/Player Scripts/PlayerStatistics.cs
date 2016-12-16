@@ -6,9 +6,13 @@ public class PlayerStatistics : MonoBehaviour {
     public int Rocks { get; set; }
     public bool IsImmortaled { get; set; }
     public bool IsMagnetActive { get; set; }
+    public GUIContent canvas;
+    private void Update()
+    {
 
+    }
 
-    void Start()
+    private void Start()
     {
         IsImmortaled = false;
         Scores = 0;

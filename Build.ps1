@@ -1,4 +1,5 @@
-﻿& '.\Build project.bat'
+﻿git pull
+& '.\Build project.bat'
 $ver = Get-Content "last ver.txt"
 $commitHash = git rev-parse HEAD
 Set-Location ".\Builds\Build ver $ver"

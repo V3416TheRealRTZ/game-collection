@@ -6,6 +6,7 @@
 /Bin/
 /run_Data/
 run.exe
+/Builds
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
