@@ -178,6 +178,8 @@ MonoBehaviour:
     m_Bits: 4294967039
   groundRadius: 0.25
   groundCheck: {fileID: 4000011636250996}
+  PlayerUiPrefab: {fileID: 1000014137059422, guid: 9b36cf7d247490949b1fca68aab8985d,
+    type: 2}
 --- !u!114 &114000010556545970
 MonoBehaviour:
   m_ObjectHideFlags: 1
