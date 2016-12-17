@@ -7,7 +7,8 @@ public class RockBehavior : Photon.PunBehaviour
     private bool collided;
     public Transform objectCheck;
     private float groundRadius = 0.2f;
-	void Update ()
+
+	void Update()
     {
         //TODO придумать, как сделать так, чтоб не реагировал на локального игрока
         collided = Physics2D.OverlapCircle(objectCheck.position, groundRadius, objects);

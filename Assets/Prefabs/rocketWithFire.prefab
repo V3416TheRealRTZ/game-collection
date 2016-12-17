@@ -22,7 +22,6 @@ GameObject:
   - 212: {fileID: 212000013905897676}
   - 60: {fileID: 60000010389376064}
   - 50: {fileID: 50000013572857018}
-  - 114: {fileID: 114000010266910240}
   - 114: {fileID: 114000011291421550}
   - 255: {fileID: 255000014269445840}
   - 95: {fileID: 95000012356527022}
@@ -68,8 +67,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011898976470}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -59.148243, y: -5.9206076, z: -4}
-  m_LocalScale: {x: 0.5218065, y: 0.5218065, z: 0.5218065}
+  m_LocalPosition: {x: 30.23, y: 2.74, z: -4}
+  m_LocalScale: {x: 4.494399, y: 4.494399, z: 4.494399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010076903280}
@@ -177,38 +176,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000010266910240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011898976470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 91
-    i1: 152
-    i2: 164
-    i3: 80
-    i4: 172
-    i5: 162
-    i6: 158
-    i7: 164
-    i8: 232
-    i9: 56
-    i10: 80
-    i11: 3
-    i12: 230
-    i13: 138
-    i14: 77
-    i15: 127
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114000011291421550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,6 +193,7 @@ MonoBehaviour:
   playerCheck: {fileID: 4000010076903280}
   playerOnRocket: 0
   time: 3
+  Velocity: 80
 --- !u!212 &212000013905897676
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -273,6 +241,6 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 23.2, y: 3.29}
+  m_ConnectedAnchor: {x: 30.23, y: 2.74}
   m_DampingRatio: 0
   m_Frequency: 0

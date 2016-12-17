@@ -7,7 +7,8 @@ public class RocketScript : MonoBehaviour
     public Transform playerCheck;
     public bool playerOnRocket = false;
     private Rigidbody2D rig;
-    public float time = 3f;
+    public float time;
+    public float Velocity;
 
     void Start()
     {
@@ -21,7 +22,7 @@ public class RocketScript : MonoBehaviour
         if (playerOnRocket)
         {
             var player = Physics2D.OverlapCircle(playerCheck.position, 0.2f, mask);
-            rig.velocity = new Vector2(15, 0);
+            rig.velocity = new Vector2(Velocity, 0);
             rig.GetComponent<FixedJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
             time -= Time.deltaTime;
         }

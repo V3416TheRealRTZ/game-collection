@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 
 public class PlayerActivities : MonoBehaviour {
+    public float ThrowStrenght;
     void ThrowRock()
     {
         int signX = Math.Sign(transform.localScale.x);
@@ -18,6 +19,6 @@ public class PlayerActivities : MonoBehaviour {
         else
             return;
         
-        rock.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(700 * signX, 700));
+        rock.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(ThrowStrenght * signX, ThrowStrenght));
     }
 }

@@ -3,12 +3,12 @@ using System.Collections;
 
 public class PlayerController : Photon.PunBehaviour
 {
-    public float jumpStrenght = 700f;
+    public float jumpStrenght = 7000f;
     Animator anim;
-    public float maxSpeed = 30f;
-    public float minSpeed = 1.5f;
-    float realSpeed;
-    public float speed = 10f;
+    public float maxSpeed = 80f;
+    public float minSpeed = 0f;
+    public float realSpeed;
+    public float speed = 50f;
     Rigidbody2D rig;
     bool facedRight = true;
     public LayerMask whatIsGround;
@@ -48,15 +48,16 @@ public class PlayerController : Photon.PunBehaviour
         if (photonView.isMine == false && PhotonNetwork.room != null)
             return;
 
-	    float move = Input.GetAxis("Horizontal");
-        anim.SetFloat("Speed", Mathf.Abs(move));
-        rig.velocity = new Vector2(move * speed, rig.velocity.y);
+	    //float move = Input.GetAxis("Horizontal");
+        anim.SetFloat("Speed", Mathf.Abs(speed));
+        //rig.velocity = new Vector2(move * speed, rig.velocity.y);
+        rig.velocity = new Vector2(speed, rig.velocity.y);
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         anim.SetBool("Grounded", grounded);
-        if (move < 0 && facedRight)
+        /*if (move < 0 && facedRight)
             Flip();
         else if (move > 0 && !facedRight)
-            Flip();
+            Flip();*/
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
 	        rig.AddForce(new Vector2(0, jumpStrenght));
 

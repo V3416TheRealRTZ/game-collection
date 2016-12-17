@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class BonusCollector : MonoBehaviour
+public class BonusCollector : Photon.PunBehaviour
 {
     private class Boost
     {
@@ -75,7 +75,7 @@ public class BonusCollector : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.GetComponent<Collider2D>().tag == "SpeedBooster")
+        if (col.tag == "SpeedBooster" || col.tag == "PropRock" && !photonView.isMine)
         {
             float coefficient = col.GetComponent<BoostProperties>().boostCoefficient;
             float timeOfAction = col.GetComponent<BoostProperties>().time;
@@ -83,7 +83,8 @@ public class BonusCollector : MonoBehaviour
             _boosts.Add(new Boost("UnboostSpeed", coefficient, timeOfAction));
             Destroy(col.gameObject);
         }
-        if (col.GetComponent<Collider2D>().tag == "JumpBooster")
+
+        if (col.tag == "JumpBooster")
         {
             
             float coefficient = col.GetComponent<BoostProperties>().boostCoefficient;
@@ -92,14 +93,14 @@ public class BonusCollector : MonoBehaviour
             _boosts.Add(new Boost("UnboostJump", coefficient, timeOfAction));
             Destroy(col.gameObject);
         }
-        if (col.GetComponent<Collider2D>().tag == "MoneyBonus")
+        if (col.tag == "MoneyBonus")
         {
             _moneyCoeff = col.GetComponent<BoostProperties>().boostCoefficient;
             _moneyBonusTime = col.GetComponent<BoostProperties>().time;
             Destroy(col.gameObject);
         }
         
-        if (col.GetComponent<Collider2D>().tag == "Coin")
+        if (col.tag == "Coin")
         {
             _stats.Scores += (int)_moneyCoeff;
             Destroy(col.gameObject);
@@ -124,6 +125,13 @@ public class BonusCollector : MonoBehaviour
             _magnetTime = col.GetComponent<BoostProperties>().time;
             _stats.IsMagnetActive = true;
             Destroy(col.gameObject);
+        }
+
+        if (col.tag == "Finish")
+        {
+            gameObject.GetComponent<PlayerController>().speed = 0;
+            gameObject.GetComponent<PlayerController>().realSpeed = 0;
+            //TODO финишный экран со статистикой
         }
     }
 
