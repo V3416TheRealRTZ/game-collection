@@ -34,3 +34,4 @@ obj/
 Assets/Scripts/Building script.meta
 build info.txt
 last ver.txt
+*.txt
