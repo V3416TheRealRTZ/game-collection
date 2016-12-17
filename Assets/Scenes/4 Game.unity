@@ -668,7 +668,7 @@ Canvas:
   m_GameObject: {fileID: 725252949}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 2012253037}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1114,10 +1114,10 @@ RectTransform:
   - {fileID: 2092779785}
   m_Father: {fileID: 725252950}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -509.7, y: 247.4}
-  m_SizeDelta: {x: 193.3, y: 136.1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 96.649994, y: -68.05}
+  m_SizeDelta: {x: 193.29999, y: 136.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1826491520
 MonoBehaviour:
