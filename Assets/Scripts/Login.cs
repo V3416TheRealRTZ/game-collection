@@ -123,8 +123,6 @@ public class Login : Photon.MonoBehaviour {
         GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
     }
 
-
-    // Update is called once per frame
     void Update () {
 	
 	}
