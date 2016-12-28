@@ -75,7 +75,7 @@ public class BonusCollector : Photon.PunBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "SpeedBooster" || col.tag == "PropRock" && !photonView.isMine)
+        if (col.tag == "SpeedBooster" || col.tag == "PropRock" && tag != "SelfPlayer")
         {
             float coefficient = col.GetComponent<BoostProperties>().boostCoefficient;
             float timeOfAction = col.GetComponent<BoostProperties>().time;

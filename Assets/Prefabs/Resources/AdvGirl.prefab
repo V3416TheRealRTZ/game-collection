@@ -55,6 +55,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000012647362452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013768286526}
+  m_Layer: 8
+  m_Name: bonusCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000012939483290
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,8 +111,22 @@ Transform:
   m_Children:
   - {fileID: 4000011636250996}
   - {fileID: 4000014076140646}
+  - {fileID: 4000013768286526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &4000013768286526
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012647362452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.88, y: 1.22, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000013715661776}
+  m_RootOrder: 2
 --- !u!4 &4000014076140646
 Transform:
   m_ObjectHideFlags: 1
@@ -192,8 +221,14 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967039
+  groundAndBonuses:
+    serializedVersion: 2
+    m_Bits: 4294966985
+  isBot: 0
   groundRadius: 0.25
+  bonusRadius: 2.5
   groundCheck: {fileID: 4000011636250996}
+  bonusCheck: {fileID: 4000013768286526}
   PlayerUiPrefab: {fileID: 1000014137059422, guid: 9b36cf7d247490949b1fca68aab8985d,
     type: 2}
 --- !u!114 &114000010556545970

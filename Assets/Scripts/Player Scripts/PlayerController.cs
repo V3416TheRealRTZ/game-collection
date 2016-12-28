@@ -12,10 +12,13 @@ public class PlayerController : Photon.PunBehaviour
     Rigidbody2D rig;
     bool facedRight = true;
     public LayerMask whatIsGround;
+    public LayerMask groundAndBonuses;
+    public bool isBot;
     public float groundRadius = 0.2f;
+    public float bonusRadius = 2f;
     bool grounded = false;
     public Transform groundCheck;
-
+    public Transform bonusCheck;
     public GameObject PlayerUiPrefab;
 
 
@@ -53,13 +56,15 @@ public class PlayerController : Photon.PunBehaviour
         //rig.velocity = new Vector2(move * speed, rig.velocity.y);
         rig.velocity = new Vector2(speed, rig.velocity.y);
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+        
         anim.SetBool("Grounded", grounded);
         /*if (move < 0 && facedRight)
             Flip();
         else if (move > 0 && !facedRight)
             Flip();*/
-        if (Input.GetKeyDown(KeyCode.Space) && grounded)
-	        rig.AddForce(new Vector2(0, jumpStrenght));
+        bool bonus = Physics2D.OverlapCircle(bonusCheck.position, bonusRadius, whatIsGround);
+        if (Input.GetKeyDown(KeyCode.Space) && grounded || isBot && bonus && grounded)
+            rig.AddForce(new Vector2(0, jumpStrenght));
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
             SendMessage("ThrowRock");
