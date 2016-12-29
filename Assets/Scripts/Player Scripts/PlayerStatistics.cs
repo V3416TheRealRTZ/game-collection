@@ -3,10 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerStatistics : MonoBehaviour {
-    public int Scores { get; set; }
-    public int Rocks { get; set; }
-    public bool IsImmortaled { get; set; }
-    public bool IsMagnetActive { get; set; }
+    public int Scores;
+    public int Rocks;
+    public bool IsImmortaled;
+    public bool IsMagnetActive;
     public GUIContent canvas;
     private void Update()
     {

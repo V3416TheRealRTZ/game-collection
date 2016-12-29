@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using PlayFab.ClientModels;
+using System.Collections.Generic;
+using PlayFab;
+using System;
 
 public class PlayerController : Photon.PunBehaviour
 {
@@ -8,7 +12,8 @@ public class PlayerController : Photon.PunBehaviour
     public float maxSpeed = 80f;
     public float minSpeed = 0f;
     public float realSpeed;
-    public float speed = 50f;
+    public float speed;
+    float initSpeed = 50f;
     Rigidbody2D rig;
     bool facedRight = true;
     public LayerMask whatIsGround;
@@ -20,54 +25,81 @@ public class PlayerController : Photon.PunBehaviour
     public Transform groundCheck;
     public Transform bonusCheck;
     public GameObject PlayerUiPrefab;
+    public string PlayfabId;
+    public int PlayfabScore;
 
+    void Awake()
+    {
+        stop();
+    }
 
     void Start()
     {
+
+        if (PhotonNetwork.room != null && photonView.isMine && !isBot)
+        {
+            PlayfabId = PlayerPrefs.GetString("PlayFabId");
+            GetUserDataRequest req = new GetUserDataRequest()
+            {
+                Keys = new List<string> { "Score" },
+                PlayFabId = PlayfabId
+            };
+            PlayFabClientAPI.GetUserPublisherData(req, (GetUserDataResult res) =>
+            {
+                UserDataRecord data;
+                if (res.Data.TryGetValue("Score", out data))
+                {
+                    Debug.Log("Score = " + data.Value);
+                    PlayfabScore = Convert.ToInt32(data.Value);
+                }
+            },
+            (PlayFabError err) => Debug.Log(err.ErrorMessage));
+        }
         anim = GetComponent<Animator>();
         rig = GetComponent<Rigidbody2D>();
         rig.inertia = 100f;
-        realSpeed = speed;
         if (!photonView.isMine && PhotonNetwork.room != null)
         {
             GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<CircleCollider2D>().isTrigger = true;
             GetComponent<Rigidbody2D>().isKinematic = true;
+            gameObject.layer = LayerMask.NameToLayer("another_player");
         }
+
+        if (isBot)
+            gameObject.layer = LayerMask.NameToLayer("another_player");
 
         if (PlayerUiPrefab != null)
         {
-            GameObject _uiGo = Instantiate(PlayerUiPrefab) as GameObject;
-            _uiGo.GetComponent<PlayerUI>().setTarget(this);
+            PlayerUiPrefab = Instantiate(PlayerUiPrefab) as GameObject;
+            PlayerUiPrefab.GetComponent<PlayerUI>().setTarget(this);
         }
         else
-        {
             Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
-        }
     }
 
 	void FixedUpdate()
 	{
-        if (photonView.isMine == false && PhotonNetwork.room != null)
-            return;
+        if (PhotonNetwork.room != null)
+            if (!photonView.isMine || (!PhotonNetwork.isMasterClient && isBot))
+                return;
 
-	    //float move = Input.GetAxis("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(speed));
-        //rig.velocity = new Vector2(move * speed, rig.velocity.y);
         rig.velocity = new Vector2(speed, rig.velocity.y);
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         
         anim.SetBool("Grounded", grounded);
-        /*if (move < 0 && facedRight)
-            Flip();
-        else if (move > 0 && !facedRight)
-            Flip();*/
         bool bonus = Physics2D.OverlapCircle(bonusCheck.position, bonusRadius, whatIsGround);
-        if (Input.GetKeyDown(KeyCode.Space) && grounded || isBot && bonus && grounded)
+        if ((Input.GetKeyDown(KeyCode.Space) && grounded && !isBot) || (PhotonNetwork.isMasterClient && isBot && bonus && grounded))
             rig.AddForce(new Vector2(0, jumpStrenght));
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
             SendMessage("ThrowRock");
+
+        if (FindObjectOfType<GameManager>().finished)
+        {
+            stop();
+        }
 
 	}
 
@@ -122,10 +154,6 @@ public class PlayerController : Photon.PunBehaviour
         transform.localScale = scale;
     }
 
-    // public override void OnStartLocalPlayer()
-    // {
-    //     GetComponent<SpriteRenderer>().color = Color.red;
-    // }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -141,5 +169,18 @@ public class PlayerController : Photon.PunBehaviour
             rig.AddForceAtPosition(vect, collision.transform.position);
             //rig.velocity = new Vector2(vect.x * xBoost, vect.y * yBoost);
         }
+    }
+
+
+    public void stop()
+    {
+        realSpeed = 0;
+        speed = 0;
+    }
+
+    public void go()
+    {
+        realSpeed = initSpeed;
+        speed = initSpeed;
     }
 }

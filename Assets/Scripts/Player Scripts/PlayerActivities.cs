@@ -18,6 +18,7 @@ public class PlayerActivities : MonoBehaviour {
         }
         else
             return;
+        rock.layer = LayerMask.NameToLayer("rock");
         
         rock.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(ThrowStrenght * signX, ThrowStrenght));
     }

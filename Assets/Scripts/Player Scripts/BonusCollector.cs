@@ -2,15 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.UI;
 
 public class BonusCollector : Photon.PunBehaviour
 {
+    private bool finished = false;
     private class Boost
     {
         public string SendCommand { get; private set; }
         public float BoostingCoeff { get; private set; }
         public float RemainingTime { get; set; }
-
+       
 
         public Boost(string command, float coefficient, float time)
         {
@@ -131,6 +133,13 @@ public class BonusCollector : Photon.PunBehaviour
         {
             gameObject.GetComponent<PlayerController>().speed = 0;
             gameObject.GetComponent<PlayerController>().realSpeed = 0;
+            if (!finished)
+            {
+                Debug.Log("finished " + gameObject.GetComponent<PlayerController>().PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
+                FindObjectOfType<GameManager>().places.Add(gameObject);
+                Debug.Log("places count = " + FindObjectOfType<GameManager>().places.Count.ToString());
+                finished = true;
+            }
             //TODO финишный экран со статистикой
         }
     }

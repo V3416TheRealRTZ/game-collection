@@ -16,7 +16,9 @@ public class PlayerUI : MonoBehaviour {
     }
 
     void Start () {
-        if (PlayerPrefs.HasKey("DisplayName") && PlayerPrefs.GetString("DisplayName") != "")
+        if (_target.isBot)
+            PlayerNameText.text = "Player" + (int)Random.Range(0.0f, 1000.0f);
+        else if (PlayerPrefs.HasKey("DisplayName") && PlayerPrefs.GetString("DisplayName") != "")
             PlayerNameText.text = PlayerPrefs.GetString("DisplayName");
         else
             PlayerNameText.text = PlayerPrefs.GetString("Username");
