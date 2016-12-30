@@ -14,8 +14,8 @@ public class GameManager : Photon.PunBehaviour {
     private GameObject girl;
     public float addBotTime = 1;
     private float _currentTime = 0;
-    private bool started = false;
-    public bool finished = false;
+    public bool started = false;
+    private bool finished = false;
 
     private List<GameObject> bots = new List<GameObject>();
     public List<GameObject> places = new List<GameObject>();
@@ -67,6 +67,7 @@ public class GameManager : Photon.PunBehaviour {
                 {
                     bot.GetComponent<PlayerController>().go();
                 }
+                girl.GetComponent<PlayerController>().photonView.RPC("changeToStarted", PhotonTargets.Others, null);
                 started = true;
             }
             else if (_currentTime >= addBotTime)
@@ -85,11 +86,12 @@ public class GameManager : Photon.PunBehaviour {
         {
             finished = true;
             Debug.Log("finished");
-            foreach (var bot in bots)
+            /*foreach (var bot in bots)
             {
                 bot.GetComponent<PlayerController>().stop();
             }
             girl.GetComponent<PlayerController>().stop();
+            */
 
             foreach (var obj in FindObjectsOfType<PlayerController>())
                 if (!places.Contains(obj.gameObject))
@@ -155,7 +157,6 @@ public class GameManager : Photon.PunBehaviour {
     {
         PhotonNetwork.LeaveRoom();
     }
-
 
 
     #endregion

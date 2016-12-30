@@ -19,7 +19,7 @@ MonoBehaviour:
   VoiceAppID: 
   PreferredRegion: 0
   EnabledRegions: -1
-  JoinLobby: 1
+  JoinLobby: 0
   EnableLobbyStatistics: 0
   RpcList:
   - Chat
@@ -32,4 +32,6 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - go
+  - changeToStarted
   DisableAutoOpenWizard: 1

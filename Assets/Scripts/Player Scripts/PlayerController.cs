@@ -4,6 +4,7 @@ using PlayFab.ClientModels;
 using System.Collections.Generic;
 using PlayFab;
 using System;
+using UnityEngine.UI;
 
 public class PlayerController : Photon.PunBehaviour
 {
@@ -27,6 +28,8 @@ public class PlayerController : Photon.PunBehaviour
     public GameObject PlayerUiPrefab;
     public string PlayfabId;
     public int PlayfabScore;
+
+    public bool runnerStarted = false;
 
     void Awake()
     {
@@ -84,6 +87,7 @@ public class PlayerController : Photon.PunBehaviour
             if (!photonView.isMine || (!PhotonNetwork.isMasterClient && isBot))
                 return;
 
+
         anim.SetFloat("Speed", Mathf.Abs(speed));
         rig.velocity = new Vector2(speed, rig.velocity.y);
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
@@ -96,10 +100,11 @@ public class PlayerController : Photon.PunBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
             SendMessage("ThrowRock");
 
-        if (FindObjectOfType<GameManager>().finished)
+        if (runnerStarted)
         {
-            stop();
+            go();
         }
+
 
 	}
 
@@ -154,33 +159,25 @@ public class PlayerController : Photon.PunBehaviour
         transform.localScale = scale;
     }
 
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "VietnamStar")
-        {
-            Vector2 vect = transform.position - collision.transform.position;
-            float xBoost = collision.gameObject.GetComponent<VietnamStarScript>().xBoost;
-            float yBoost = collision.gameObject.GetComponent<VietnamStarScript>().yBoost;
-            //rig.AddForce(new Vector2(vect.x * xBoost, vect.y * yBoost), ForceMode2D.Impulse);
-            vect.x = vect.x * xBoost;
-            vect.y = (vect.y + 0.125f) * yBoost;
-            //rig.AddRelativeForce(vect);
-            rig.AddForceAtPosition(vect, collision.transform.position);
-            //rig.velocity = new Vector2(vect.x * xBoost, vect.y * yBoost);
-        }
-    }
-
-
     public void stop()
     {
+        Debug.Log("Called stop by" + PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
         realSpeed = 0;
         speed = 0;
     }
 
     public void go()
     {
+        Debug.Log("Called go by" + PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
         realSpeed = initSpeed;
         speed = initSpeed;
     }
+
+    [PunRPC]
+    public void changeToStarted()
+    {
+        runnerStarted = true;
+    }
+
+
 }

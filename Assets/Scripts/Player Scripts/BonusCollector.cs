@@ -42,7 +42,10 @@ public class BonusCollector : Photon.PunBehaviour
 
 	void FixedUpdate()
 	{
-	    var toRemove = _boosts.FindAll((boost) => boost.RemainingTime <= 0);
+        PlayerController pc = gameObject.GetComponent<PlayerController>();
+        if (!pc.photonView.isMine || (pc.isBot && !PhotonNetwork.isMasterClient))
+            return;
+        var toRemove = _boosts.FindAll((boost) => boost.RemainingTime <= 0);
 	    if (toRemove.Count != 0)
 	    {
 	        foreach (var boost in toRemove)
@@ -77,7 +80,7 @@ public class BonusCollector : Photon.PunBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "SpeedBooster" || col.tag == "PropRock" && tag != "SelfPlayer")
+        if (col.tag == "SpeedBooster" || col.tag == "PropRock")
         {
             float coefficient = col.GetComponent<BoostProperties>().boostCoefficient;
             float timeOfAction = col.GetComponent<BoostProperties>().time;
