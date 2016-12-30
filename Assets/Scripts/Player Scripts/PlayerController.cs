@@ -6,7 +6,7 @@ using PlayFab;
 using System;
 using UnityEngine.UI;
 
-public class PlayerController : Photon.PunBehaviour
+public class PlayerController : Photon.MonoBehaviour
 {
     public float jumpStrenght = 7000f;
     Animator anim;
@@ -103,6 +103,7 @@ public class PlayerController : Photon.PunBehaviour
         if (runnerStarted)
         {
             go();
+            runnerStarted = false;
         }
 
 
@@ -176,7 +177,12 @@ public class PlayerController : Photon.PunBehaviour
     [PunRPC]
     public void changeToStarted()
     {
-        runnerStarted = true;
+        Debug.Log("chageToStarted " + runnerStarted.ToString());
+        foreach(var obj in FindObjectsOfType<PlayerController>())
+        {
+            obj.runnerStarted = true;
+        }
+        Debug.Log("runnerStarted = " + runnerStarted.ToString());
     }
 
 

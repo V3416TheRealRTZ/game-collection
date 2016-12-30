@@ -35,6 +35,8 @@ public class PlayerUI : MonoBehaviour {
 
     void LateUpdate()
     {
+        if (_target == null)
+            return;
         PlayerNameText.transform.position = _target.transform.position;
         PlayerNameText.transform.position = new Vector3(_target.transform.position.x, _target.transform.position.y + _playerHeight);
     }
