@@ -93,12 +93,12 @@ public class PlayerController : Photon.MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         
         anim.SetBool("Grounded", grounded);
-        bool bonus = Physics2D.OverlapCircle(bonusCheck.position, bonusRadius, whatIsGround);
+        bool bonus = Physics2D.OverlapCircle(bonusCheck.position, bonusRadius, groundAndBonuses);
         if ((Input.GetKeyDown(KeyCode.Space) && grounded && !isBot) || (PhotonNetwork.isMasterClient && isBot && bonus && grounded))
             rig.AddForce(new Vector2(0, jumpStrenght));
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            SendMessage("ThrowRock");
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !isBot)
+            gameObject.GetComponent<PlayerActivities>().ThrowRock();
 
         if (runnerStarted)
         {

@@ -231,6 +231,9 @@ MonoBehaviour:
   bonusCheck: {fileID: 4000013768286526}
   PlayerUiPrefab: {fileID: 1000014137059422, guid: 9b36cf7d247490949b1fca68aab8985d,
     type: 2}
+  PlayfabId: 
+  PlayfabScore: 0
+  runnerStarted: 0
 --- !u!114 &114000010556545970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,6 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9540f3f97b09941bd1c682c110f64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Scores: 0
+  Rocks: 0
+  IsImmortaled: 0
+  IsMagnetActive: 0
   canvas:
     m_Text: 
     m_Image: {fileID: 0}

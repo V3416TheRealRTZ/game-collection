@@ -80,7 +80,7 @@ public class BonusCollector : Photon.PunBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "SpeedBooster" || col.tag == "PropRock")
+        if (col.tag == "SpeedBooster" || (col.tag == "PropRock" && gameObject.layer == LayerMask.NameToLayer("another_player")))
         {
             float coefficient = col.GetComponent<BoostProperties>().boostCoefficient;
             float timeOfAction = col.GetComponent<BoostProperties>().time;
