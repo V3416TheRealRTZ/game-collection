@@ -134,8 +134,7 @@ public class BonusCollector : Photon.PunBehaviour
 
         if (col.tag == "Finish")
         {
-            gameObject.GetComponent<PlayerController>().speed = 0;
-            gameObject.GetComponent<PlayerController>().realSpeed = 0;
+            gameObject.GetComponent<PlayerController>().stop();
             if (!finished)
             {
                 Debug.Log("finished " + gameObject.GetComponent<PlayerController>().PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);

@@ -276,6 +276,7 @@ MonoBehaviour:
   - {fileID: 114000013961306258}
   - {fileID: 114000012342521694}
   - {fileID: 114000013596551354}
+  - {fileID: 114000010205094646}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -292,6 +293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrowStrenght: 5500
+  time: 0
+  delta: 0.25
 --- !u!114 &114000011124216028
 MonoBehaviour:
   m_ObjectHideFlags: 1

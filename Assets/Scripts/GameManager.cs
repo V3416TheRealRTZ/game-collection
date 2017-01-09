@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ public class GameManager : Photon.PunBehaviour {
     public float addBotTime = 1;
     private float _currentTime = 0;
     public bool started = false;
-    private bool finished = false;
+    public bool finished = false;
 
     private List<GameObject> bots = new List<GameObject>();
     public List<GameObject> places = new List<GameObject>();
@@ -57,7 +57,8 @@ public class GameManager : Photon.PunBehaviour {
             _isLeaving = true;
             LeaveRoom();
         }
-        
+
+        //var playing = girl.GetComponent<PlayerController>().runnerPlaying;
         if (!started && PhotonNetwork.isMasterClient && PhotonNetwork.room != null)
         {
             if (PhotonNetwork.room.playerCount + botsCount >= PhotonNetwork.room.maxPlayers)
@@ -82,10 +83,11 @@ public class GameManager : Photon.PunBehaviour {
                 _currentTime += Time.deltaTime;
         }
 
-        if (places.Count >= 3 && !finished)
+        if (places.Count >= 3 && !finished && PhotonNetwork.isMasterClient)
         {
-            finished = true;
-            Debug.Log("finished");
+            girl.GetComponent<PlayerController>().photonView.RPC("gameFinished", PhotonTargets.All, null);
+            
+
             /*foreach (var bot in bots)
             {
                 bot.GetComponent<PlayerController>().stop();
@@ -104,11 +106,9 @@ public class GameManager : Photon.PunBehaviour {
             for (int i =0; i<4; i++)
             {
                 PlayerController pc = places[i].GetComponent<PlayerController>();
-                if (pc.isBot)
+                pl[i] = pc.PlayfabScore;
+                if (pc.isBot || pl[i] == 0)
                     pl[i] = 1200;
-                else {
-                    pl[i] = pc.PlayfabScore;
-                  }
             }
             foreach (var obj in places)
                 Debug.Log(obj.GetComponent<PlayerController>().PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
@@ -158,6 +158,6 @@ public class GameManager : Photon.PunBehaviour {
         PhotonNetwork.LeaveRoom();
     }
 
-
+    
     #endregion
 }

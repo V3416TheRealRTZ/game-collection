@@ -11,7 +11,7 @@ public class PlayerStatistics : MonoBehaviour {
     private void Update()
     {
         PlayerController pc = gameObject.GetComponent<PlayerController>();
-        if (!pc.photonView.isMine || pc.isBot)
+        if ((!pc.photonView.isMine && PhotonNetwork.room != null)  || pc.isBot) 
             return;
         var jump = pc.jumpStrenght;
         var speed = pc.realSpeed;

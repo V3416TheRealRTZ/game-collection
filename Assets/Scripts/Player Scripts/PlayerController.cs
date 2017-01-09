@@ -8,7 +8,9 @@ using UnityEngine.UI;
 
 public class PlayerController : Photon.MonoBehaviour
 {
-    public float jumpStrenght = 7000f;
+
+    float initJumpStrenght = 1000f;
+	public float jumpStrenght; 
     Animator anim;
     public float maxSpeed = 80f;
     public float minSpeed = 0f;
@@ -30,6 +32,9 @@ public class PlayerController : Photon.MonoBehaviour
     public int PlayfabScore;
 
     public bool runnerStarted = false;
+    public bool runnerFinished = false;
+
+    public bool stoped = true;
 
     void Awake()
     {
@@ -83,6 +88,7 @@ public class PlayerController : Photon.MonoBehaviour
 
 	void FixedUpdate()
 	{
+
         if (PhotonNetwork.room != null)
             if (!photonView.isMine || (!PhotonNetwork.isMasterClient && isBot))
                 return;
@@ -104,7 +110,11 @@ public class PlayerController : Photon.MonoBehaviour
         {
             go();
             runnerStarted = false;
+            //runnerPlaying = true;
         }
+        if (runnerFinished && !stoped){
+			stop();
+		}
 
 
 	}
@@ -165,6 +175,8 @@ public class PlayerController : Photon.MonoBehaviour
         Debug.Log("Called stop by" + PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
         realSpeed = 0;
         speed = 0;
+        jumpStrenght = 0;
+        stoped = true;
     }
 
     public void go()
@@ -172,6 +184,8 @@ public class PlayerController : Photon.MonoBehaviour
         Debug.Log("Called go by" + PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
         realSpeed = initSpeed;
         speed = initSpeed;
+        jumpStrenght = initJumpStrenght;
+        stoped = false;
     }
 
     [PunRPC]
@@ -183,7 +197,35 @@ public class PlayerController : Photon.MonoBehaviour
             obj.runnerStarted = true;
         }
         Debug.Log("runnerStarted = " + runnerStarted.ToString());
+        gameObject.GetComponent<GameManager>().started = true;
     }
 
+    [PunRPC]
+    public void gameFinished()
+    {
+        FindObjectOfType<GameManager>().finished = true;
+        runnerFinished = true;
+    }
+
+	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+	{
+	    if (stream.isWriting)
+	    {
+
+	        stream.Serialize(ref PlayfabId);
+	        stream.Serialize(ref PlayfabScore);
+	        string name = PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text;
+	        stream.Serialize(ref name);
+	    }
+	    else
+	    {
+	        stream.Serialize(ref PlayfabId); 
+	        stream.Serialize(ref PlayfabScore);
+	        string name = "";
+	        stream.Serialize(ref name);
+	        PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text = name;
+
+	    }
+	}
 
 }

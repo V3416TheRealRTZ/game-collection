@@ -34,4 +34,5 @@ MonoBehaviour:
   - RequestForPickupTimes
   - go
   - changeToStarted
+  - gameFinished
   DisableAutoOpenWizard: 1
