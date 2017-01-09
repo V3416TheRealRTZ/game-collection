@@ -479,7 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
     serializedVersion: 2
-    m_Bits: 4294966473
+    m_Bits: 4294963401
   objectCheck: {fileID: 4000012550772408}
 --- !u!114 &114000013383159394
 MonoBehaviour:

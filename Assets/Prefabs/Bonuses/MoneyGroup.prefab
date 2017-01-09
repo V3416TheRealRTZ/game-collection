@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011434702414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MoneyGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

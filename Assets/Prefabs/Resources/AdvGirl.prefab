@@ -220,13 +220,13 @@ MonoBehaviour:
   speed: 50
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294963401
   groundAndBonuses:
     serializedVersion: 2
-    m_Bits: 4294966985
+    m_Bits: 4294963913
   isBot: 0
-  groundRadius: 0.25
-  bonusRadius: 2.5
+  groundRadius: 0.4
+  bonusRadius: 5
   groundCheck: {fileID: 4000011636250996}
   bonusCheck: {fileID: 4000013768286526}
   PlayerUiPrefab: {fileID: 1000014137059422, guid: 9b36cf7d247490949b1fca68aab8985d,
