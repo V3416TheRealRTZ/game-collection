@@ -158,6 +158,8 @@ public class BonusCollector : Photon.PunBehaviour
     {
         if ((collision.gameObject.tag == "DeceleratingBarrier") && !_stats.IsImmortaled)
         {
+            if (gameObject.GetComponent<PlayerController>().realSpeed <= collision.gameObject.GetComponent<BoostProperties>().boostCoefficient)
+                return;
             gameObject.SendMessage("BoostSpeed", 0.5);
             _boosts.Add(new Boost("UnboostSpeed", 0.5f, 5.0f));
         }
