@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000011872290072}
   - 212: {fileID: 212000012866977806}
   - 60: {fileID: 60000013685393388}
+  - 114: {fileID: 114000012981863920}
   m_Layer: 0
   m_Name: Chair
   m_TagString: DeceleratingBarrier
@@ -97,6 +98,19 @@ PolygonCollider2D:
       - {x: 0.445, y: -1.51}
       - {x: 0.42315334, y: -0.398198}
       - {x: 0.625, y: -0.39999998}
+--- !u!114 &114000012981863920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013152855102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66d79766bed317f47ae94d1975c8a58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostCoefficient: 25
+  time: 0
 --- !u!212 &212000012866977806
 SpriteRenderer:
   m_ObjectHideFlags: 1
