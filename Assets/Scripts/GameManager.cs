@@ -20,6 +20,8 @@ public class GameManager : Photon.PunBehaviour {
     private List<GameObject> bots = new List<GameObject>();
     public List<GameObject> places = new List<GameObject>();
 
+
+    public FinishPopup finishPopup;
     #region Public Proporites
 
     public Transform startPoint;
@@ -27,6 +29,7 @@ public class GameManager : Photon.PunBehaviour {
 
     public void Start()
     {
+        finishPopup.switchOff();
         Debug.Log("Start game scene");
         girl = null;
         if (PhotonNetwork.room == null)
@@ -63,14 +66,22 @@ public class GameManager : Photon.PunBehaviour {
         {
             if (PhotonNetwork.room.playerCount + botsCount >= PhotonNetwork.room.maxPlayers)
             {
-                girl.GetComponent<PlayerController>().go();
+                /*girl.GetComponent<PlayerController>().go();
                 foreach (var bot in bots)
                 {
                     bot.GetComponent<PlayerController>().go();
-                }
-                girl.GetComponent<PlayerController>().photonView.RPC("changeToStarted", PhotonTargets.Others, null);
+                }*/
+                //girl.GetComponent<PlayerController>().photonView.RPC("changeToStarted", PhotonTargets.Others, null);
                 started = true;
+                Debug.Log("before go");
+                foreach (var obj in FindObjectsOfType<PlayerController>())
+                    if (obj.isBot)
+                        obj.go();
+                    else
+                        obj.photonView.RPC("go", PhotonTargets.All);
+                PhotonNetwork.room.open = false;
             }
+                
             else if (_currentTime >= addBotTime)
             {
                 _currentTime -= addBotTime;
@@ -85,56 +96,62 @@ public class GameManager : Photon.PunBehaviour {
 
         if (places.Count >= 3 && !finished && PhotonNetwork.isMasterClient)
         {
-            girl.GetComponent<PlayerController>().photonView.RPC("gameFinished", PhotonTargets.All, null);
-            
+            finished = true;
 
-            /*foreach (var bot in bots)
-            {
-                bot.GetComponent<PlayerController>().stop();
-            }
-            girl.GetComponent<PlayerController>().stop();
-            */
+            Debug.Log("before stop");
 
             foreach (var obj in FindObjectsOfType<PlayerController>())
+            {
+                obj.photonView.RPC("stop", PhotonTargets.All);
                 if (!places.Contains(obj.gameObject))
                 {
                     places.Add(obj.gameObject);
-                    break;
+                    Debug.Log("before set results");
+
+                    finishPopup.photonView.RPC("setResult", PhotonTargets.All, 4, obj.gameObject.GetComponent<PlayerStatistics>().Scores, obj.PlayerName);
                 }
-
-            int[] pl = new int[4];
-            for (int i =0; i<4; i++)
-            {
-                PlayerController pc = places[i].GetComponent<PlayerController>();
-                pl[i] = pc.PlayfabScore;
-                if (pc.isBot || pl[i] == 0)
-                    pl[i] = 1200;
             }
-            foreach (var obj in places)
-                Debug.Log(obj.GetComponent<PlayerController>().PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
-            foreach (var obj in pl)
-               Debug.Log(obj);
 
-            pl = ELO.new_scores(pl);
+                int[] pl = new int[4];
+                for (int i = 0; i < 4; i++)
+                {
+                    PlayerController pc = places[i].GetComponent<PlayerController>();
+                    pl[i] = pc.PlayfabScore;
+                    if (pc.isBot || pl[i] == 0)
+                        pl[i] = 1200;
+                }
+                foreach (var obj in places)
+                    Debug.Log(obj.GetComponent<PlayerController>().PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
+                foreach (var obj in pl)
+                    Debug.Log(obj);
 
-            Debug.Log("New Scores:");
-            foreach (var obj in pl)
-                Debug.Log(obj);
+                pl = ELO.new_scores(pl);
 
-            for (int i = 0; i < 4; i++)
-            {
-                PlayerController pc = places[i].GetComponent<PlayerController>();
-                if (!pc.isBot && pc.photonView.isMine) {
-                    var d = new Dictionary<string, string>();
-                    d.Add("Score", pl[i].ToString());
-                    UpdateUserDataRequest req = new UpdateUserDataRequest()
+                Debug.Log("New Scores:");
+                foreach (var obj in pl)
+                    Debug.Log(obj);
+
+                for (int i = 0; i < 4; i++)
+                {
+                    PlayerController pc = places[i].GetComponent<PlayerController>();
+                    if (!pc.isBot && pc.photonView.isMine)
                     {
-                        Data = d,
-                        Permission = UserDataPermission.Public
-                    };
-                    PlayFabClientAPI.UpdateUserPublisherData(req, (UpdateUserDataResult) => { Debug.Log("Good"); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+                        UpdatePlayerStatisticsRequest req = new UpdatePlayerStatisticsRequest()
+                        {
+                            Statistics = new List<StatisticUpdate> { new StatisticUpdate() { StatisticName = "Score", Value = pl[i] } }
+                        };
+                        PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult) => { Debug.Log("Good"); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+                    }
+                Debug.Log("before set new score");
+
+                finishPopup.photonView.RPC("setNewScore", PhotonTargets.All, pl[i], pc.PlayerName);
+                    
+                    //finishPopup.setNewScore(pl[i], pc.PlayerName);
                 }
-            }
+            Debug.Log("before activate actions");
+
+            finishPopup.photonView.RPC("activateActions", PhotonTargets.All);
+
 
         }
 
@@ -143,10 +160,7 @@ public class GameManager : Photon.PunBehaviour {
 
     #region Photon Messages
 
-    public void OnLeftRoom()
-    {
-        Debug.Log("Leave room");
-    }
+    
 
     public void OnConnectedToMaster()
     {
@@ -158,6 +172,24 @@ public class GameManager : Photon.PunBehaviour {
         PhotonNetwork.LeaveRoom();
     }
 
-    
+    public void Restart()
+    {
+        Loading.Load(LoadingScene.Game);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.Serialize(ref finished);
+            stream.Serialize(ref started);
+        }
+        else
+        {
+            stream.Serialize(ref finished);
+            stream.Serialize(ref started);
+        }
+    }
+
     #endregion
 }

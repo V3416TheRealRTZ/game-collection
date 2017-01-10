@@ -50,14 +50,12 @@ public class Register : MonoBehaviour {
 
         Debug.Log(string.Format("Register Successful. Welcome Player: {0}!", result.PlayFabId));
         Debug.Log(string.Format("Your session ticket is: {0}", result.SessionTicket));
-        var d = new Dictionary<string, string>();
-        d.Add("Score", "1200");
-        UpdateUserDataRequest req = new UpdateUserDataRequest()
+        UpdatePlayerStatisticsRequest req = new UpdatePlayerStatisticsRequest()
         {
-            Data = d,
-            Permission = UserDataPermission.Public
+            Statistics = new List<StatisticUpdate> { new StatisticUpdate() { StatisticName = "Score", Value = 1200 } }
         };
-        PlayFabClientAPI.UpdateUserPublisherData(req, (UpdateUserDataResult)=> { Debug.Log("Good"); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+        PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult) => { Debug.Log("Good"); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+
         Loading.Load(LoadingScene.Lobby);
     }
 

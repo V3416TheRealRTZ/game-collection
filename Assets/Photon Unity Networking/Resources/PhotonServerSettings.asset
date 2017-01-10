@@ -35,4 +35,11 @@ MonoBehaviour:
   - go
   - changeToStarted
   - gameFinished
+  - setNewScore
+  - setResult
+  - addNewPlayer
+  - activateActions
+  - leavePlayer
+  - ThrowRock
+  - stop
   DisableAutoOpenWizard: 1

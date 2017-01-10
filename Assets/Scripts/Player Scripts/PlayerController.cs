@@ -6,7 +6,7 @@ using PlayFab;
 using System;
 using UnityEngine.UI;
 
-public class PlayerController : Photon.MonoBehaviour
+public class PlayerController : Photon.PunBehaviour
 {
 
     float initJumpStrenght = 1000f;
@@ -30,10 +30,7 @@ public class PlayerController : Photon.MonoBehaviour
     public GameObject PlayerUiPrefab;
     public string PlayfabId;
     public int PlayfabScore;
-
-    public bool runnerStarted = false;
-    public bool runnerFinished = false;
-
+    public string PlayerName;
     public bool stoped = true;
 
     void Awake()
@@ -44,25 +41,6 @@ public class PlayerController : Photon.MonoBehaviour
     void Start()
     {
 
-        if (PhotonNetwork.room != null && photonView.isMine && !isBot)
-        {
-            PlayfabId = PlayerPrefs.GetString("PlayFabId");
-            GetUserDataRequest req = new GetUserDataRequest()
-            {
-                Keys = new List<string> { "Score" },
-                PlayFabId = PlayfabId
-            };
-            PlayFabClientAPI.GetUserPublisherData(req, (GetUserDataResult res) =>
-            {
-                UserDataRecord data;
-                if (res.Data.TryGetValue("Score", out data))
-                {
-                    Debug.Log("Score = " + data.Value);
-                    PlayfabScore = Convert.ToInt32(data.Value);
-                }
-            },
-            (PlayFabError err) => Debug.Log(err.ErrorMessage));
-        }
         anim = GetComponent<Animator>();
         rig = GetComponent<Rigidbody2D>();
         rig.inertia = 100f;
@@ -81,9 +59,33 @@ public class PlayerController : Photon.MonoBehaviour
         {
             PlayerUiPrefab = Instantiate(PlayerUiPrefab) as GameObject;
             PlayerUiPrefab.GetComponent<PlayerUI>().setTarget(this);
+            PlayerUiPrefab.GetComponent<PlayerUI>().setName();
+            PlayerName = PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text;
         }
         else
             Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+
+        if (photonView == null || (isBot && PhotonNetwork.isMasterClient))
+            FindObjectOfType<GameManager>().finishPopup.photonView.RPC("addNewPlayer", PhotonTargets.All, PlayerName, 1200);
+
+        if (PhotonNetwork.room != null && photonView.isMine && !isBot)
+        {
+                PlayfabId = PlayerPrefs.GetString("PlayFabId");
+                GetPlayerStatisticsRequest req = new GetPlayerStatisticsRequest()
+                {
+                    StatisticNames = new List<string> { "Score" },
+                };
+                PlayFabClientAPI.GetPlayerStatistics(req, (GetPlayerStatisticsResult res) =>
+                {
+                    if (res.Statistics != null)
+                    {
+                        Debug.Log("Score = " + res.Statistics[0].Value);
+                        PlayfabScore = res.Statistics[0].Value;
+                        FindObjectOfType<GameManager>().finishPopup.photonView.RPC("addNewPlayer", PhotonTargets.AllBuffered, PlayerName, PlayfabScore);
+                    }
+                },
+                (PlayFabError err) => Debug.Log(err.ErrorMessage));
+          }
     }
 
 	void FixedUpdate()
@@ -104,20 +106,13 @@ public class PlayerController : Photon.MonoBehaviour
             rig.AddForce(new Vector2(0, jumpStrenght));
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && !isBot)
+        /*{
+            Debug.Log("before throw rock in pc");
+            photonView.RPC("ThrowRock", PhotonTargets.All);
+        }*/
+            
             gameObject.GetComponent<PlayerActivities>().ThrowRock();
-
-        if (runnerStarted)
-        {
-            go();
-            runnerStarted = false;
-            //runnerPlaying = true;
-        }
-        if (runnerFinished && !stoped){
-			stop();
-		}
-
-
-	}
+    }
 
     void BoostSpeed(float boost)
     {
@@ -170,62 +165,51 @@ public class PlayerController : Photon.MonoBehaviour
         transform.localScale = scale;
     }
 
+    [PunRPC]
     public void stop()
     {
-        Debug.Log("Called stop by" + PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
         realSpeed = 0;
         speed = 0;
         jumpStrenght = 0;
         stoped = true;
     }
 
+    [PunRPC]
     public void go()
     {
-        Debug.Log("Called go by" + PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
+        Debug.Log("start in go");
         realSpeed = initSpeed;
         speed = initSpeed;
         jumpStrenght = initJumpStrenght;
         stoped = false;
     }
 
-    [PunRPC]
-    public void changeToStarted()
-    {
-        Debug.Log("chageToStarted " + runnerStarted.ToString());
-        foreach(var obj in FindObjectsOfType<PlayerController>())
-        {
-            obj.runnerStarted = true;
-        }
-        Debug.Log("runnerStarted = " + runnerStarted.ToString());
-        gameObject.GetComponent<GameManager>().started = true;
-    }
-
-    [PunRPC]
-    public void gameFinished()
-    {
-        FindObjectOfType<GameManager>().finished = true;
-        runnerFinished = true;
-    }
-
-	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
 	{
 	    if (stream.isWriting)
 	    {
-
 	        stream.Serialize(ref PlayfabId);
 	        stream.Serialize(ref PlayfabScore);
-	        string name = PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text;
-	        stream.Serialize(ref name);
+	        stream.Serialize(ref PlayerName);
 	    }
 	    else
 	    {
 	        stream.Serialize(ref PlayfabId); 
 	        stream.Serialize(ref PlayfabScore);
-	        string name = "";
-	        stream.Serialize(ref name);
-	        PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text = name;
+	        stream.Serialize(ref PlayerName);
+	        PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text = PlayerName;
+        }
+    }
 
-	    }
-	}
+    public void OnLeftRoom()
+    {
+        GameManager gm = FindObjectOfType<GameManager>();
+        Debug.Log("Leave room");
+        if (!gm.finished)
+        {
+            Debug.Log("Runner not finished");
+            gm.finishPopup.photonView.RPC("leavePlayer", PhotonTargets.Others, PlayerName);
+        }
+    }
 
 }

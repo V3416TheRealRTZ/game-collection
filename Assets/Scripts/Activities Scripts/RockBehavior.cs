@@ -10,16 +10,14 @@ public class RockBehavior : Photon.PunBehaviour
 
 	void Update()
     {
-        //TODO придумать, как сделать так, чтоб не реагировал на локального игрока
         collided = Physics2D.OverlapCircle(objectCheck.position, groundRadius, objects);
         if (collided)
         {
+            Debug.Log("before rock destroy");
             if (PhotonNetwork.room == null)
                 Destroy(gameObject);
-            else if (PhotonNetwork.isMasterClient)
+            else if (gameObject != null)
                 PhotonNetwork.Destroy(gameObject);
-            //Destroy(gameObject);
-            //Debug.Assert(collided);
         }
 	}
 }

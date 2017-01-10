@@ -29,7 +29,9 @@ public class BonusCollector : Photon.PunBehaviour
     private List<Boost> _boosts;
     private PlayerStatistics _stats;
     private PlayerActivities _activs;
-    
+    private GameManager _gameManager;
+    private PlayerController pc;
+
     void Start()
     {
         _boosts = new List<Boost>();
@@ -38,11 +40,13 @@ public class BonusCollector : Photon.PunBehaviour
         _shieldTime = 0;
         _stats = GetComponent<PlayerStatistics>();
         _activs = GetComponent<PlayerActivities>();
+        _gameManager = FindObjectOfType<GameManager>();
+        pc = gameObject.GetComponent<PlayerController>();
     }
 
 	void FixedUpdate()
 	{
-        PlayerController pc = gameObject.GetComponent<PlayerController>();
+        
         if (!pc.photonView.isMine || (pc.isBot && !PhotonNetwork.isMasterClient))
             return;
         var toRemove = _boosts.FindAll((boost) => boost.RemainingTime <= 0);
@@ -134,15 +138,19 @@ public class BonusCollector : Photon.PunBehaviour
 
         if (col.tag == "Finish")
         {
-            gameObject.GetComponent<PlayerController>().stop();
+            pc.stop();
             if (!finished)
             {
-                Debug.Log("finished " + gameObject.GetComponent<PlayerController>().PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
-                FindObjectOfType<GameManager>().places.Add(gameObject);
-                Debug.Log("places count = " + FindObjectOfType<GameManager>().places.Count.ToString());
+                Debug.Log("finished " + pc.PlayerName);
+                _gameManager.places.Add(gameObject);
+                Debug.Log("places count = " + _gameManager.places.Count.ToString());
                 finished = true;
+                int place = _gameManager.places.Count > 4 ? 4 : _gameManager.places.Count;
+                _gameManager.finishPopup.photonView.RPC("setResult", PhotonTargets.All, place, gameObject.GetComponent<PlayerStatistics>().Scores, pc.PlayerName);
+                if (!pc.isBot && pc.photonView.isMine)
+                    _gameManager.finishPopup.switchOn();
             }
-            //TODO финишный экран со статистикой
+            
         }
     }
 

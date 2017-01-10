@@ -9,26 +9,30 @@ public class PlayerUI : MonoBehaviour {
     PlayerController _target;
     float _playerHeight = 0f;
 
-
     void Awake()
     {
-        this.GetComponent<Transform>().SetParent(GameObject.Find("Canvas").GetComponent<Transform>());
+        GetComponent<Transform>().SetParent(GameObject.Find("Canvas").GetComponent<Transform>());       
     }
 
-    void Start () {
+    public void setName()
+    {
         if (_target.isBot)
             PlayerNameText.text = "Player" + (int)Random.Range(0.0f, 1000.0f);
         else if (PlayerPrefs.HasKey("DisplayName") && PlayerPrefs.GetString("DisplayName") != "")
             PlayerNameText.text = PlayerPrefs.GetString("DisplayName");
         else
             PlayerNameText.text = PlayerPrefs.GetString("Username");
+    }
+
+    void Start () {
+        //setName();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (_target == null)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
     }

@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -478,10 +478,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 644818462}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 262}
-  m_SizeDelta: {x: 802, y: 53}
+  m_AnchorMin: {x: 0.5, y: 0.8258848}
+  m_AnchorMax: {x: 0.5, y: 0.89725655}
+  m_AnchoredPosition: {x: 2, y: -1}
+  m_SizeDelta: {x: 802, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1834124783
 MonoBehaviour:
