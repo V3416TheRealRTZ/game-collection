@@ -41,5 +41,5 @@ public class PlayerActivities : Photon.PunBehaviour {
         rock.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(ThrowStrenght * signX, ThrowStrenght));
     }
 
-
+    
 }

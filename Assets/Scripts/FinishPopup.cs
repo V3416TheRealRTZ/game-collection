@@ -23,12 +23,12 @@ public class FinishPopup : Photon.PunBehaviour {
 	    
 	}
 
+    [PunRPC]
     public void switchOn()
     {
         Debug.Log("Table switched on");
         var pos = finishPopup.transform.position;
-        if (photonView.isMine)
-            finishPopup.transform.position = new Vector3(pos.x, pos.y, 0);
+        finishPopup.transform.position = new Vector3(pos.x, pos.y, 0);
     }
 
     public void switchOff()

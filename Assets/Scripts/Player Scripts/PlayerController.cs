@@ -108,9 +108,8 @@ public class PlayerController : Photon.PunBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && !isBot)
         /*{
             Debug.Log("before throw rock in pc");
-            photonView.RPC("ThrowRock", PhotonTargets.All);
+            photonView.RPC("ThrowRock", PhotonTargets.MasterClient);
         }*/
-            
             gameObject.GetComponent<PlayerActivities>().ThrowRock();
     }
 
@@ -191,13 +190,13 @@ public class PlayerController : Photon.PunBehaviour
 	        stream.Serialize(ref PlayfabId);
 	        stream.Serialize(ref PlayfabScore);
 	        stream.Serialize(ref PlayerName);
-	    }
-	    else
+        }
+        else
 	    {
 	        stream.Serialize(ref PlayfabId); 
 	        stream.Serialize(ref PlayfabScore);
 	        stream.Serialize(ref PlayerName);
-	        PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text = PlayerName;
+            PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text = PlayerName;
         }
     }
 

@@ -16,7 +16,7 @@ public class RockBehavior : Photon.PunBehaviour
             Debug.Log("before rock destroy");
             if (PhotonNetwork.room == null)
                 Destroy(gameObject);
-            else if (gameObject != null)
+            else if (photonView.isMine)
                 PhotonNetwork.Destroy(gameObject);
         }
 	}

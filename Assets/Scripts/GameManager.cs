@@ -15,12 +15,14 @@ public class GameManager : Photon.PunBehaviour {
     public float addBotTime = 1;
     private float _currentTime = 0;
     public bool started = false;
+    public bool readyToStart = false;
     public bool finished = false;
+    private float countdown = 4f;
 
     private List<GameObject> bots = new List<GameObject>();
     public List<GameObject> places = new List<GameObject>();
 
-
+    public Text countdownText;
     public FinishPopup finishPopup;
     #region Public Proporites
 
@@ -51,7 +53,15 @@ public class GameManager : Photon.PunBehaviour {
         }
     }
 
-
+    private void runAll()
+    {
+        Debug.Log("before go");
+        foreach (var obj in FindObjectsOfType<PlayerController>())
+            if (obj.isBot)
+                obj.go();
+            else
+                obj.photonView.RPC("go", PhotonTargets.All);
+    }
 
     public void Update()
     {
@@ -61,7 +71,33 @@ public class GameManager : Photon.PunBehaviour {
             LeaveRoom();
         }
 
-        //var playing = girl.GetComponent<PlayerController>().runnerPlaying;
+        if (readyToStart)
+        {
+            countdownText.gameObject.SetActive(true);
+            if (countdown <= 0)
+            {
+                countdownText.text = "RUN";
+                if (!started)
+                    runAll();
+                started = true;
+            }
+            else
+            {
+                if (countdown <= 1)
+                    countdownText.text = "1";
+                else if (countdown <= 2)
+                    countdownText.text = "2";
+                else if (countdown <= 3)
+                    countdownText.text = "3";
+                
+                
+                    countdown -= Time.deltaTime;
+                
+            }
+        }
+        if (started)
+            countdownText.gameObject.SetActive(false);
+
         if (!started && PhotonNetwork.isMasterClient && PhotonNetwork.room != null)
         {
             if (PhotonNetwork.room.playerCount + botsCount >= PhotonNetwork.room.maxPlayers)
@@ -72,13 +108,7 @@ public class GameManager : Photon.PunBehaviour {
                     bot.GetComponent<PlayerController>().go();
                 }*/
                 //girl.GetComponent<PlayerController>().photonView.RPC("changeToStarted", PhotonTargets.Others, null);
-                started = true;
-                Debug.Log("before go");
-                foreach (var obj in FindObjectsOfType<PlayerController>())
-                    if (obj.isBot)
-                        obj.go();
-                    else
-                        obj.photonView.RPC("go", PhotonTargets.All);
+                readyToStart = true;
                 PhotonNetwork.room.open = false;
             }
                 
@@ -97,7 +127,7 @@ public class GameManager : Photon.PunBehaviour {
         if (places.Count >= 3 && !finished && PhotonNetwork.isMasterClient)
         {
             finished = true;
-
+            finishPopup.photonView.RPC("switchOn", PhotonTargets.All);
             Debug.Log("before stop");
 
             foreach (var obj in FindObjectsOfType<PlayerController>())
@@ -140,11 +170,23 @@ public class GameManager : Photon.PunBehaviour {
                         {
                             Statistics = new List<StatisticUpdate> { new StatisticUpdate() { StatisticName = "Score", Value = pl[i] } }
                         };
-                        PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult) => { Debug.Log("Good"); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+                        PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult) => { Debug.Log("Score updated"); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+
+                        AddUserVirtualCurrencyRequest reqCur = new AddUserVirtualCurrencyRequest()
+                        {
+                            VirtualCurrency = "GO",
+                            Amount = pc.gameObject.GetComponent<PlayerStatistics>().Scores,
+                        };
+                        PlayFabClientAPI.AddUserVirtualCurrency(reqCur, (ModifyUserVirtualCurrencyResult res) =>
+                        {
+                            Debug.Log("Money updated for " + res.BalanceChange.ToString() + ". Now money = " + res.Balance.ToString());
+                        },
+                        (PlayFabError err) => Debug.Log(err.ErrorMessage));
                     }
+
                 Debug.Log("before set new score");
 
-                finishPopup.photonView.RPC("setNewScore", PhotonTargets.All, pl[i], pc.PlayerName);
+                    finishPopup.photonView.RPC("setNewScore", PhotonTargets.All, pl[i], pc.PlayerName);
                     
                     //finishPopup.setNewScore(pl[i], pc.PlayerName);
                 }
@@ -183,11 +225,14 @@ public class GameManager : Photon.PunBehaviour {
         {
             stream.Serialize(ref finished);
             stream.Serialize(ref started);
+            stream.Serialize(ref readyToStart);
         }
         else
         {
             stream.Serialize(ref finished);
             stream.Serialize(ref started);
+            stream.Serialize(ref readyToStart);
+
         }
     }
 

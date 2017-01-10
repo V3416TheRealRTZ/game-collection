@@ -42,4 +42,5 @@ MonoBehaviour:
   - leavePlayer
   - ThrowRock
   - stop
+  - switchOn
   DisableAutoOpenWizard: 1

@@ -26,4 +26,6 @@ public class PlayerStatistics : MonoBehaviour {
         Scores = 0;
         Rocks = 0;
     }
+
+
 }
