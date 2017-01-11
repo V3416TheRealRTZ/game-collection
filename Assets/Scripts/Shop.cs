@@ -12,10 +12,15 @@ public class Shop : MonoBehaviour {
     public string catalogVersion = "main";
     public List<ShopItem> items = new List<ShopItem>();
     public List<CatalogItem> allCatalogItems;
+    public Text speedText;
+    public Text jumpText;
+    public Text moneybonusText;
+    public Text shieldText;
 
-	void Start () {
+    void Start () {
         if (moneyText != null) moneyText.text = PlayerInfo.Money.ToString();
         PlayerInfo.UpdateMoney();
+        PlayerInfo.UpdateTitleUserData();
         getShopItems();
 	}
 	
@@ -26,13 +31,17 @@ public class Shop : MonoBehaviour {
         }
         if (PlayerInfo.IsInventoryChanged)
             UpdateShopItems();
+
+        if (PlayerInfo.IsTitleUserDataChanged)
+        {
+            UpdateUserDataInfo();
+        }
 	}
 
     public void BackToMenu()
     {
         Loading.Load(LoadingScene.Lobby);
     }
-
 
     public void getShopItems()
     {
@@ -70,6 +79,7 @@ public class Shop : MonoBehaviour {
                 saveBuyBonus(item.catalogItem);
                 Destroy(item.gameObject);
                 PlayerInfo.UpdateInventory();
+                PlayerInfo.UpdateTitleUserData();
             }
         },
         (PlayFabError err) => Debug.Log(err.ErrorMessage));
@@ -149,4 +159,20 @@ public class Shop : MonoBehaviour {
         }
 
     }
+
+    private void UpdateUserDataInfo()
+    {
+        string speed = PlayerInfo.TitleUserData.ContainsKey("speed") ? PlayerInfo.TitleUserData["speed"] : "0";
+        string jump = PlayerInfo.TitleUserData.ContainsKey("jump") ? PlayerInfo.TitleUserData["jump"] : "0";
+        string moneybonus = PlayerInfo.TitleUserData.ContainsKey("moneybonus") ? PlayerInfo.TitleUserData["moneybonus"] : "0";
+        string shield = PlayerInfo.TitleUserData.ContainsKey("shield") ? PlayerInfo.TitleUserData["shield"] : "0";
+        
+        speedText.text = "+" + speed + "%";
+        jumpText.text = "+" + jump + "%";
+        moneybonusText.text = "+" + moneybonus + "s";
+        shieldText.text = "+" + shield + "s";
+    }
 }
+
+
+
