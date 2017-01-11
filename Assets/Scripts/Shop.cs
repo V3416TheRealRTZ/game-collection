@@ -46,23 +46,6 @@ public class Shop : MonoBehaviour {
             {
                 allCatalogItems = res.Catalog;
                 UpdateShopItems();
-                /*
-                foreach (var itemInfo in res.Catalog)
-                {
-                    if (isClassContainedInItems(itemInfo) || isContainedInInventory(itemInfo))
-                        continue;
-
-                    GameObject i = (GameObject)Instantiate(Resources.Load<GameObject>("ShopItem"), Vector3.zero, Quaternion.identity);
-                    ShopItem item = i.GetComponent<ShopItem>();
-                    item.titleText.text = itemInfo.DisplayName;
-                    item.descriptionText.text = itemInfo.Description;
-                    item.priceText.text = itemInfo.VirtualCurrencyPrices["GO"].ToString();
-                    item.itemId = itemInfo.ItemId;
-                    item.itemClass = itemInfo.ItemClass;
-                    LockUnlockItem(item);
-                    items.Add(item);
-                }
-                */
             }
         },
         (PlayFabError err) => Debug.Log(err.ErrorMessage));

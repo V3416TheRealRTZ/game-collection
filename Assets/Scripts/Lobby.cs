@@ -73,4 +73,9 @@ public class Lobby : Photon.PunBehaviour {
     {
         Loading.Load(LoadingScene.Shop);
     }
+
+    public void Rating()
+    {
+        Loading.Load(LoadingScene.Rating);
+    }
 }

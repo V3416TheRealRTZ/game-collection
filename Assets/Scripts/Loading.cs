@@ -6,7 +6,8 @@ public enum LoadingScene
     Lobby,
     Game,
     Register,
-    Shop
+    Shop,
+    Rating
 }
 
 public class Loading : MonoBehaviour {
@@ -25,7 +26,7 @@ public class Loading : MonoBehaviour {
         {
             PlayerInfo.UpdateScore();
             PlayerInfo.UpdateMoney();
-            PlayerInfo.UpdateInventory();    
+            PlayerInfo.UpdateInventory();
         }
         else if (_nextScene == LoadingScene.Game)
             PhotonNetwork.LoadLevel("4 Game");
@@ -33,6 +34,8 @@ public class Loading : MonoBehaviour {
             PhotonNetwork.LoadLevel("5 Register");
         else if (_nextScene == LoadingScene.Shop)
             PhotonNetwork.LoadLevel("6 Shop");
+        else if (_nextScene == LoadingScene.Rating)
+            PhotonNetwork.LoadLevel("7 Rating");
     }
 
 	void OnJoinedLobby()

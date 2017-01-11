@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/5 Register.unity
   - enabled: 1
     path: Assets/Scenes/6 Shop.unity
+  - enabled: 1
+    path: Assets/Scenes/7 Rating.unity
