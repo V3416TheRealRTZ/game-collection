@@ -14,14 +14,17 @@ public class PlayerUI : MonoBehaviour {
         GetComponent<Transform>().SetParent(GameObject.Find("Canvas").GetComponent<Transform>());       
     }
 
-    public void setName()
+    public void setName(string name)
     {
-        if (_target.isBot)
+        PlayerNameText.text = name;
+        /*if (_target.isBot)
             PlayerNameText.text = "Player" + (int)Random.Range(0.0f, 1000.0f);
+        else
+            PlayerNameText.text = PlayerInfo.DisplayName;
         else if (PlayerPrefs.HasKey("DisplayName") && PlayerPrefs.GetString("DisplayName") != "")
             PlayerNameText.text = PlayerPrefs.GetString("DisplayName");
         else
-            PlayerNameText.text = PlayerPrefs.GetString("Username");
+            PlayerNameText.text = PlayerPrefs.GetString("Username");*/
     }
 
     void Start () {

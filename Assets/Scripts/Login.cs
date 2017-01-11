@@ -74,10 +74,15 @@ public class Login : Photon.MonoBehaviour {
         Debug.Log(string.Format("Login Successful. Welcome Player: {0}!", result.PlayFabId));
         Debug.Log(string.Format("Your session ticket is: {0}", result.SessionTicket));
 
-        PlayerPrefs.SetString("PlayFabId", result.PlayFabId);
-        PlayerPrefs.SetString("SessionTicket", result.SessionTicket);
+        //PlayerPrefs.SetString("PlayFabId", result.PlayFabId);
+        //PlayerPrefs.SetString("SessionTicket", result.SessionTicket);
         PlayerPrefs.SetString("Username", _usernameField.text);
-        PlayerPrefs.SetString("DisplayName", result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName);
+        //PlayerPrefs.SetString("DisplayName", result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName);
+
+        PlayerInfo.PlayFabId = result.PlayFabId;
+        PlayerInfo.SessionTicket= result.SessionTicket;
+        PlayerInfo.Username= _usernameField.text;
+        PlayerInfo.DisplayName= result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
 
         Loading.Load(LoadingScene.Lobby);
     }
@@ -118,10 +123,6 @@ public class Login : Photon.MonoBehaviour {
         Loading.Load(LoadingScene.Register);
     }
 
-    void OnGUI()
-    {
-        GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-    }
 
     void Update () {
 	

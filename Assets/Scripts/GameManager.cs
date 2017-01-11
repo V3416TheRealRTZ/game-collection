@@ -204,7 +204,7 @@ public class GameManager : Photon.PunBehaviour {
 
     
 
-    public void OnConnectedToMaster()
+    public override void OnConnectedToMaster()
     {
         Loading.Load(LoadingScene.Lobby);
     }

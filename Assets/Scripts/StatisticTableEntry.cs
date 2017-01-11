@@ -36,7 +36,8 @@ public class StatisticTableEntry : MonoBehaviour {
                 scoreT.text = score.ToString();
                 int scoreChange = score - oldScore;
                 scoreChangeT.text = scoreChange.ToString();
-                scoreChangeT.color = scoreChange <= 0 ? Color.red : Color.green;
+                scoreChangeT.text = scoreChange < 0 ? scoreChangeT.text+ " ↓" :scoreChangeT.text + " ↑";
+                scoreChangeT.color = scoreChange < 0 ? Color.red : Color.green;
             }
         }
         usernameT.text = playerName;

@@ -3,7 +3,7 @@ using System.Collections;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using PlayFab;
-using System;
+//using System;
 using UnityEngine.UI;
 
 public class PlayerController : Photon.PunBehaviour
@@ -28,7 +28,7 @@ public class PlayerController : Photon.PunBehaviour
     public Transform groundCheck;
     public Transform bonusCheck;
     public GameObject PlayerUiPrefab;
-    public string PlayfabId;
+    //public string PlayfabId;
     public int PlayfabScore;
     public string PlayerName;
     public bool stoped = true;
@@ -36,6 +36,7 @@ public class PlayerController : Photon.PunBehaviour
     void Awake()
     {
         stop();
+
     }
 
     void Start()
@@ -53,14 +54,23 @@ public class PlayerController : Photon.PunBehaviour
         }
 
         if (isBot)
+        {
             gameObject.layer = LayerMask.NameToLayer("another_player");
+            PlayerName = "Player" + ((int)Random.Range(0.0f, 1000.0f)).ToString();
+        }
+        else
+        {
+            PlayerName = PlayerInfo.DisplayName;
+            PlayfabScore = PlayerInfo.Score;
+            FindObjectOfType<GameManager>().finishPopup.photonView.RPC("addNewPlayer", PhotonTargets.AllBuffered, PlayerInfo.DisplayName, PlayerInfo.Score);
+        }
 
         if (PlayerUiPrefab != null)
         {
             PlayerUiPrefab = Instantiate(PlayerUiPrefab) as GameObject;
             PlayerUiPrefab.GetComponent<PlayerUI>().setTarget(this);
-            PlayerUiPrefab.GetComponent<PlayerUI>().setName();
-            PlayerName = PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text;
+            PlayerUiPrefab.GetComponent<PlayerUI>().setName(PlayerName);
+            //PlayerName = PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text;
         }
         else
             Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
@@ -68,24 +78,11 @@ public class PlayerController : Photon.PunBehaviour
         if (photonView == null || (isBot && PhotonNetwork.isMasterClient))
             FindObjectOfType<GameManager>().finishPopup.photonView.RPC("addNewPlayer", PhotonTargets.All, PlayerName, 1200);
 
-        if (PhotonNetwork.room != null && photonView.isMine && !isBot)
+        /*if (PhotonNetwork.room != null && photonView.isMine && !isBot)
         {
-                PlayfabId = PlayerPrefs.GetString("PlayFabId");
-                GetPlayerStatisticsRequest req = new GetPlayerStatisticsRequest()
-                {
-                    StatisticNames = new List<string> { "Score" },
-                };
-                PlayFabClientAPI.GetPlayerStatistics(req, (GetPlayerStatisticsResult res) =>
-                {
-                    if (res.Statistics != null)
-                    {
-                        Debug.Log("Score = " + res.Statistics[0].Value);
-                        PlayfabScore = res.Statistics[0].Value;
-                        FindObjectOfType<GameManager>().finishPopup.photonView.RPC("addNewPlayer", PhotonTargets.AllBuffered, PlayerName, PlayfabScore);
-                    }
-                },
-                (PlayFabError err) => Debug.Log(err.ErrorMessage));
-          }
+            PlayfabScore = PlayerInfo.Score;
+            FindObjectOfType<GameManager>().finishPopup.photonView.RPC("addNewPlayer", PhotonTargets.AllBuffered, PlayerInfo.DisplayName, PlayerInfo.Score);
+        }*/
     }
 
 	void FixedUpdate()
@@ -187,20 +184,18 @@ public class PlayerController : Photon.PunBehaviour
 	{
 	    if (stream.isWriting)
 	    {
-	        stream.Serialize(ref PlayfabId);
 	        stream.Serialize(ref PlayfabScore);
 	        stream.Serialize(ref PlayerName);
         }
         else
 	    {
-	        stream.Serialize(ref PlayfabId); 
 	        stream.Serialize(ref PlayfabScore);
 	        stream.Serialize(ref PlayerName);
             PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text = PlayerName;
         }
     }
 
-    public void OnLeftRoom()
+    public override void OnLeftRoom()
     {
         GameManager gm = FindObjectOfType<GameManager>();
         Debug.Log("Leave room");

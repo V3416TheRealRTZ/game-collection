@@ -14,41 +14,26 @@ public class Lobby : Photon.PunBehaviour {
 
     void Start()
     {
-        getInfo();
-        string dispayName = "";
-        if (PlayerPrefs.HasKey("DispayName"))
-            dispayName = PlayerPrefs.GetString("DisplayName");
-        else if (PlayerPrefs.HasKey("Username"))
-            dispayName = PlayerPrefs.GetString("Username");
-        helloText.text += dispayName;
+        scoreText.text = PlayerInfo.Score.ToString();
+        ratingText.text = PlayerInfo.Rating.ToString();
+        moneyText.text = PlayerInfo.Money.ToString();
+        PlayerInfo.UpdateScore();
+        PlayerInfo.UpdateMoney();
+        PlayerInfo.UpdateInventory();
+        helloText.text += PlayerInfo.DisplayName;
     }
 
-    public void getInfo()
+    void Update()
     {
-        GetLeaderboardAroundPlayerRequest req = new GetLeaderboardAroundPlayerRequest()
+        if (PlayerInfo.IsScoreChanged)
         {
-            StatisticName = "Score",
-        };
-        PlayFabClientAPI.GetLeaderboardAroundPlayer(req, (GetLeaderboardAroundPlayerResult res) =>
+            scoreText.text = PlayerInfo.Score.ToString();
+            ratingText.text = PlayerInfo.Rating.ToString();
+        }
+        if (PlayerInfo.IsMoneyChanged)
         {
-            if (res.Leaderboard != null)
-            {
-                scoreText.text = res.Leaderboard[0].StatValue.ToString();
-                ratingText.text = (res.Leaderboard[0].Position+1).ToString();
-            }
-        },
-        (PlayFabError err) => Debug.Log(err.ErrorMessage));
-
-        AddUserVirtualCurrencyRequest reqCur = new AddUserVirtualCurrencyRequest()
-        {
-            VirtualCurrency = "GO",
-            Amount = 0,
-        };
-        PlayFabClientAPI.AddUserVirtualCurrency(reqCur, (ModifyUserVirtualCurrencyResult res) =>
-        {
-            if (res != null) moneyText.text = res.Balance.ToString();
-        },
-        (PlayFabError err) => Debug.Log(err.ErrorMessage));
+            if (moneyText != null) moneyText.text = PlayerInfo.Money.ToString();
+        }
     }
 
     public void JoinRndRoom()
@@ -74,7 +59,7 @@ public class Lobby : Photon.PunBehaviour {
         CreateRndRoom();
     }
 
-    public void OnJoinedRoom()
+    public override void OnJoinedRoom()
     {
         Loading.Load(LoadingScene.Game);
     }
@@ -82,5 +67,10 @@ public class Lobby : Photon.PunBehaviour {
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void Shop()
+    {
+        Loading.Load(LoadingScene.Shop);
     }
 }

@@ -42,11 +42,16 @@ public class Register : MonoBehaviour {
 
     void OnRegisterCallback(RegisterPlayFabUserResult result)
     {
-        PlayerPrefs.SetString("PlayFabId", result.PlayFabId);
-        PlayerPrefs.SetString("SessionTicket", result.SessionTicket);
-        PlayerPrefs.SetString("DisplayName", _usernameField.text);
+        //PlayerPrefs.SetString("PlayFabId", result.PlayFabId);
+        //PlayerPrefs.SetString("SessionTicket", result.SessionTicket);
+        //PlayerPrefs.SetString("DisplayName", _usernameField.text);
         PlayerPrefs.SetString("Username", result.Username);
 
+        PlayerInfo.PlayFabId = result.PlayFabId;
+        PlayerInfo.SessionTicket = result.SessionTicket;
+        PlayerInfo.Username = result.Username;
+        PlayerInfo.DisplayName = _usernameField.text;
+        
 
         Debug.Log(string.Format("Register Successful. Welcome Player: {0}!", result.PlayFabId));
         Debug.Log(string.Format("Your session ticket is: {0}", result.SessionTicket));
