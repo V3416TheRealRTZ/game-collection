@@ -84,6 +84,7 @@ public class BonusCollector : Photon.PunBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        float improvement = 0;
         if (col.tag == "PropRock" && gameObject.layer == LayerMask.NameToLayer("another_player"))
         {
             float coefficient = col.GetComponent<BoostProperties>().boostCoefficient;
@@ -95,7 +96,9 @@ public class BonusCollector : Photon.PunBehaviour
 
         if (col.tag == "SpeedBooster")
         {
-            float coefficient = col.GetComponent<BoostProperties>().boostCoefficient + float.Parse(PlayerInfo.TitleUserData["speed"]) / 100f;
+            if (PlayerInfo.TitleUserData.ContainsKey("speed"))
+                improvement = float.Parse(PlayerInfo.TitleUserData["speed"]) / 100f;
+            float coefficient = col.GetComponent<BoostProperties>().boostCoefficient + improvement;
             float timeOfAction = col.GetComponent<BoostProperties>().time;
             SendMessage("BoostSpeed", coefficient);
             _boosts.Add(new Boost("UnboostSpeed", coefficient, timeOfAction));
@@ -104,7 +107,9 @@ public class BonusCollector : Photon.PunBehaviour
 
         if (col.tag == "JumpBooster")
         {
-            float coefficient = col.GetComponent<BoostProperties>().boostCoefficient + float.Parse(PlayerInfo.TitleUserData["jump"]) / 100f;
+            if (PlayerInfo.TitleUserData.ContainsKey("jump"))
+                improvement = float.Parse(PlayerInfo.TitleUserData["jump"]) / 100f;
+            float coefficient = col.GetComponent<BoostProperties>().boostCoefficient + improvement;
             float timeOfAction = col.GetComponent<BoostProperties>().time;
             SendMessage("BoostJump", coefficient);
             _boosts.Add(new Boost("UnboostJump", coefficient, timeOfAction));
@@ -112,8 +117,10 @@ public class BonusCollector : Photon.PunBehaviour
         }
         if (col.tag == "MoneyBonus")
         {
+            if (PlayerInfo.TitleUserData.ContainsKey("moneybonus"))
+                improvement = float.Parse(PlayerInfo.TitleUserData["moneybonus"]);
             _moneyCoeff = col.GetComponent<BoostProperties>().boostCoefficient;
-            _moneyBonusTime = col.GetComponent<BoostProperties>().time + float.Parse(PlayerInfo.TitleUserData["moneybonus"]);
+            _moneyBonusTime = col.GetComponent<BoostProperties>().time + improvement;
             Destroy(col.gameObject);
         }
         
@@ -132,7 +139,9 @@ public class BonusCollector : Photon.PunBehaviour
 
         if (col.tag == "Shield")
         {
-            _shieldTime = col.GetComponent<BoostProperties>().time + float.Parse(PlayerInfo.TitleUserData["shield"]);
+            if (PlayerInfo.TitleUserData.ContainsKey("shield"))
+                improvement = float.Parse(PlayerInfo.TitleUserData["shield"]);
+            _shieldTime = col.GetComponent<BoostProperties>().time + improvement;
             _stats.IsImmortaled = true;
             Destroy(col.gameObject);
         }
