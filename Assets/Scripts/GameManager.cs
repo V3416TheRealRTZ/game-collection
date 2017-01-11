@@ -102,12 +102,6 @@ public class GameManager : Photon.PunBehaviour {
         {
             if (PhotonNetwork.room.playerCount + botsCount >= PhotonNetwork.room.maxPlayers)
             {
-                /*girl.GetComponent<PlayerController>().go();
-                foreach (var bot in bots)
-                {
-                    bot.GetComponent<PlayerController>().go();
-                }*/
-                //girl.GetComponent<PlayerController>().photonView.RPC("changeToStarted", PhotonTargets.Others, null);
                 readyToStart = true;
                 PhotonNetwork.room.open = false;
             }
@@ -128,7 +122,6 @@ public class GameManager : Photon.PunBehaviour {
         {
             finished = true;
             finishPopup.photonView.RPC("switchOn", PhotonTargets.All);
-            Debug.Log("before stop");
 
             foreach (var obj in FindObjectsOfType<PlayerController>())
             {
@@ -136,8 +129,6 @@ public class GameManager : Photon.PunBehaviour {
                 if (!places.Contains(obj.gameObject))
                 {
                     places.Add(obj.gameObject);
-                    Debug.Log("before set results");
-
                     finishPopup.photonView.RPC("setResult", PhotonTargets.All, 4, obj.gameObject.GetComponent<PlayerStatistics>().Scores, obj.PlayerName);
                 }
             }
@@ -170,7 +161,7 @@ public class GameManager : Photon.PunBehaviour {
                         {
                             Statistics = new List<StatisticUpdate> { new StatisticUpdate() { StatisticName = "Score", Value = pl[i] } }
                         };
-                        PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult) => { Debug.Log("Score updated"); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+                        PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult r) => { PlayerInfo.UpdateScore(); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
 
                         AddUserVirtualCurrencyRequest reqCur = new AddUserVirtualCurrencyRequest()
                         {
@@ -179,6 +170,7 @@ public class GameManager : Photon.PunBehaviour {
                         };
                         PlayFabClientAPI.AddUserVirtualCurrency(reqCur, (ModifyUserVirtualCurrencyResult res) =>
                         {
+                            PlayerInfo.Money = res.Balance;
                             Debug.Log("Money updated for " + res.BalanceChange.ToString() + ". Now money = " + res.Balance.ToString());
                         },
                         (PlayFabError err) => Debug.Log(err.ErrorMessage));

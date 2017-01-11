@@ -36,7 +36,6 @@ public class PlayerController : Photon.PunBehaviour
     void Awake()
     {
         stop();
-
     }
 
     void Start()
@@ -56,9 +55,13 @@ public class PlayerController : Photon.PunBehaviour
         if (isBot)
         {
             gameObject.layer = LayerMask.NameToLayer("another_player");
-            PlayerName = "Player" + ((int)Random.Range(0.0f, 1000.0f)).ToString();
+            if (PhotonNetwork.isMasterClient)
+            {
+                PlayerName = "Player" + ((int)Random.Range(0.0f, 1000.0f)).ToString();
+                FindObjectOfType<GameManager>().finishPopup.photonView.RPC("addNewPlayer", PhotonTargets.All, PlayerName, 1200);
+            }
         }
-        else
+        else if (photonView.isMine)
         {
             PlayerName = PlayerInfo.DisplayName;
             PlayfabScore = PlayerInfo.Score;
@@ -75,8 +78,6 @@ public class PlayerController : Photon.PunBehaviour
         else
             Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
 
-        if (photonView == null || (isBot && PhotonNetwork.isMasterClient))
-            FindObjectOfType<GameManager>().finishPopup.photonView.RPC("addNewPlayer", PhotonTargets.All, PlayerName, 1200);
 
         /*if (PhotonNetwork.room != null && photonView.isMine && !isBot)
         {
@@ -85,7 +86,7 @@ public class PlayerController : Photon.PunBehaviour
         }*/
     }
 
-	void FixedUpdate()
+    void FixedUpdate()
 	{
 
         if (PhotonNetwork.room != null)
