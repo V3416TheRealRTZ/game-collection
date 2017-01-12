@@ -21,6 +21,7 @@ public class Build
                      .Where(fileName => !fileName.Contains(".meta"))
                      .Select(fileName => fileName)
                      .ToArray();
+        PlayerSettings.productName = "Runner ver " + version;
         BuildPipeline.BuildPlayer(levels, path + "\\BuiltGame ver " + version + ".exe", BuildTarget.StandaloneWindows, BuildOptions.Development);
         using (var writer = new StreamWriter(path + "\\build info.txt"))
         {
