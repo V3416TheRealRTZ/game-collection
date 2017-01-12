@@ -231,7 +231,6 @@ MonoBehaviour:
   bonusCheck: {fileID: 4000013768286526}
   PlayerUiPrefab: {fileID: 1000014137059422, guid: 9b36cf7d247490949b1fca68aab8985d,
     type: 2}
-  PlayfabId: 
   PlayfabScore: 0
   PlayerName: 
   stoped: 1
@@ -276,7 +275,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114000013961306258}
   - {fileID: 114000012342521694}
-  - {fileID: 114000013596551354}
+  - {fileID: 0}
   - {fileID: 114000010205094646}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
@@ -322,9 +321,9 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
+    InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 50
+    InterpolateLerpSpeed: 30
     InterpolateMoveTowardsAcceleration: 2
     InterpolateMoveTowardsDeceleration: 2
     InterpolateSpeedCurve:
@@ -353,7 +352,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ExtrapolateOption: 0
+    ExtrapolateOption: 1
     ExtrapolateSpeed: 1
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1

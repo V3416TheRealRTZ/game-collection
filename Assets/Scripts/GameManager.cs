@@ -12,7 +12,7 @@ public class GameManager : Photon.PunBehaviour {
     private bool _isLeaving = false;
     private int botsCount = 0;
     private GameObject girl;
-    public float addBotTime = 10;
+    public float addBotTime = 1;
     private float _currentTime = 0;
     public bool started = false;
     public bool readyToStart = false;
@@ -73,7 +73,7 @@ public class GameManager : Photon.PunBehaviour {
 
         if (readyToStart)
         {
-            
+            countdownText.gameObject.SetActive(true);
             if (countdown <= 0)
             {
                 countdownText.text = "RUN";
@@ -88,21 +88,13 @@ public class GameManager : Photon.PunBehaviour {
                 else if (countdown <= 2)
                     countdownText.text = "2";
                 else if (countdown <= 3)
-                {
                     countdownText.text = "3";
-                    countdownText.fontSize = 150;
-                }
                 
                 
                     countdown -= Time.deltaTime;
                 
             }
         }
-        else
-        {
-            countdownText.text = "Waiting for players...\n"+(PhotonNetwork.room.playerCount + botsCount).ToString() + " of 4";
-        }
-
         if (started)
             countdownText.gameObject.SetActive(false);
 
@@ -141,54 +133,55 @@ public class GameManager : Photon.PunBehaviour {
                 }
             }
 
-            int[] pl = new int[4];
-            for (int i = 0; i < 4; i++)
-            {
-                PlayerController pc = places[i].GetComponent<PlayerController>();
-                pl[i] = pc.PlayfabScore;
-                if (pc.isBot || pl[i] == 0)
-                    pl[i] = 1200;
-            }
-            foreach (var obj in places)
-                Debug.Log(obj.GetComponent<PlayerController>().PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
-            foreach (var obj in pl)
-                Debug.Log(obj);
-
-            pl = ELO.new_scores(pl);
-
-            Debug.Log("New Scores:");
-            foreach (var obj in pl)
-                Debug.Log(obj);
-
-            for (int i = 0; i < 4; i++)
-            {
-                PlayerController pc = places[i].GetComponent<PlayerController>();
-                Debug.Log("before set new score");
-                finishPopup.photonView.RPC("setNewScore", PhotonTargets.All, pl[i], pc.PlayerName);
-                if (!pc.isBot && pc.photonView.isMine)
+                int[] pl = new int[4];
+                for (int i = 0; i < 4; i++)
                 {
-                    finishPopup.setNewScore(pl[i], pc.PlayerName);
-                    /*
-                    UpdatePlayerStatisticsRequest req = new UpdatePlayerStatisticsRequest()
-                    {
-                        Statistics = new List<StatisticUpdate> { new StatisticUpdate() { StatisticName = "Score", Value = pl[i] } }
-                    };
-                    PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult r) => { PlayerInfo.UpdateScore(); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
-
-                    AddUserVirtualCurrencyRequest reqCur = new AddUserVirtualCurrencyRequest()
-                    {
-                        VirtualCurrency = "GO",
-                        Amount = pc.gameObject.GetComponent<PlayerStatistics>().Scores,
-                    };
-                    PlayFabClientAPI.AddUserVirtualCurrency(reqCur, (ModifyUserVirtualCurrencyResult res) =>
-                    {
-                        PlayerInfo.Money = res.Balance;
-                        Debug.Log("Money updated for " + res.BalanceChange.ToString() + ". Now money = " + res.Balance.ToString());
-                    },
-                    (PlayFabError err) => Debug.Log(err.ErrorMessage));*/     
+                    PlayerController pc = places[i].GetComponent<PlayerController>();
+                    pl[i] = pc.PlayfabScore;
+                    if (pc.isBot || pl[i] == 0)
+                        pl[i] = 1200;
                 }
-            }
-            finishPopup.photonView.RPC("UpdatePlayerStatistics", PhotonTargets.All);
+                foreach (var obj in places)
+                    Debug.Log(obj.GetComponent<PlayerController>().PlayerUiPrefab.GetComponent<PlayerUI>().PlayerNameText.GetComponent<Text>().text);
+                foreach (var obj in pl)
+                    Debug.Log(obj);
+
+                pl = ELO.new_scores(pl);
+
+                Debug.Log("New Scores:");
+                foreach (var obj in pl)
+                    Debug.Log(obj);
+
+                for (int i = 0; i < 4; i++)
+                {
+                    PlayerController pc = places[i].GetComponent<PlayerController>();
+                    if (!pc.isBot && pc.photonView.isMine)
+                    {
+                        UpdatePlayerStatisticsRequest req = new UpdatePlayerStatisticsRequest()
+                        {
+                            Statistics = new List<StatisticUpdate> { new StatisticUpdate() { StatisticName = "Score", Value = pl[i] } }
+                        };
+                        PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult r) => { PlayerInfo.UpdateScore(); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+
+                        AddUserVirtualCurrencyRequest reqCur = new AddUserVirtualCurrencyRequest()
+                        {
+                            VirtualCurrency = "GO",
+                            Amount = pc.gameObject.GetComponent<PlayerStatistics>().Scores,
+                        };
+                        PlayFabClientAPI.AddUserVirtualCurrency(reqCur, (ModifyUserVirtualCurrencyResult res) =>
+                        {
+                            PlayerInfo.Money = res.Balance;
+                            Debug.Log("Money updated for " + res.BalanceChange.ToString() + ". Now money = " + res.Balance.ToString());
+                        },
+                        (PlayFabError err) => Debug.Log(err.ErrorMessage));
+                    }
+
+                Debug.Log("before set new score");
+
+                    finishPopup.photonView.RPC("setNewScore", PhotonTargets.All, pl[i], pc.PlayerName);
+                    
+                    //finishPopup.setNewScore(pl[i], pc.PlayerName);
+                }
             Debug.Log("before activate actions");
 
             finishPopup.photonView.RPC("activateActions", PhotonTargets.All);

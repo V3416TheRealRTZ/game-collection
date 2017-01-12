@@ -29,7 +29,7 @@ public class Rating : MonoBehaviour {
                 {
                     GameObject item = (GameObject)Instantiate(Resources.Load<GameObject>("RatingListEntry"), Vector3.zero, Quaternion.identity);
                     item.GetComponent<Transform>().SetParent(GameObject.Find("Canvas/Scroll View/Viewport/Content").GetComponent<Transform>());
-                    item.transform.FindChild("Position").GetComponent<Text>().text = person.Position.ToString();
+                    item.transform.FindChild("Position").GetComponent<Text>().text = (1+person.Position).ToString();
                     item.transform.FindChild("Username").GetComponent<Text>().text = person.DisplayName.ToString();
                     item.transform.FindChild("Score").GetComponent<Text>().text = person.StatValue.ToString();
                 }

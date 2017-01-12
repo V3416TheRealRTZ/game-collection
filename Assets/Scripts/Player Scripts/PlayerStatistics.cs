@@ -13,8 +13,13 @@ public class PlayerStatistics : MonoBehaviour {
         PlayerController pc = gameObject.GetComponent<PlayerController>();
         if ((!pc.photonView.isMine && PhotonNetwork.room != null)  || pc.isBot) 
             return;
+
         var jump = pc.jumpStrenght;
         var speed = pc.realSpeed;
+        if (PlayerInfo.TitleUserData.ContainsKey("speed"))
+            speed *=1 + float.Parse(PlayerInfo.TitleUserData["speed"]) / 100f;
+        if (PlayerInfo.TitleUserData.ContainsKey("jump"))
+            jump *=1 + float.Parse(PlayerInfo.TitleUserData["jump"]) / 100f;
         GameObject.Find("Canvas/Image/Text").GetComponent<Text>().text = 
             string.Format("Очков: {0}\nКамней: {1}\nБессмертие: {2}\nМагнит: {3}\nСкорость {4}\nСила прыжка {5}"
             , Scores, Rocks, IsImmortaled, IsMagnetActive, speed, jump);

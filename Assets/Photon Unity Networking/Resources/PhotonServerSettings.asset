@@ -43,5 +43,4 @@ MonoBehaviour:
   - ThrowRock
   - stop
   - switchOn
-  - UpdatePlayerStatistics
   DisableAutoOpenWizard: 1

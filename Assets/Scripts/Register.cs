@@ -99,4 +99,9 @@ public class Register : MonoBehaviour {
 
         Debug.LogError(string.Format("{0}\n {1}\n {2}\n", http, message, details));
     }
+
+    public void BackToLogin()
+    {
+        Loading.Load(LoadingScene.Login);
+    }
 }
