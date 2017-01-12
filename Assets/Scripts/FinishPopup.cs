@@ -76,8 +76,8 @@ public class FinishPopup : Photon.PunBehaviour {
             {
                 fields[i].setResult(place, gold);
                 int index = fields[i].transform.GetSiblingIndex();
-                if (place != index)
-                    fields[i].transform.SetSiblingIndex(place);
+                if (place != index + 1)
+                    fields[i].transform.SetSiblingIndex(place - 1);
                 updateTable();
                 return;
             }
