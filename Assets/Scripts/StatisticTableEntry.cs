@@ -6,7 +6,7 @@ public class StatisticTableEntry : MonoBehaviour {
 
     int place = 0;
     public string playerName = "";
-    int gold = -1;
+    public int gold = -1;
     public int score = 0;
     int oldScore = 1200;
     int progress = 0;
