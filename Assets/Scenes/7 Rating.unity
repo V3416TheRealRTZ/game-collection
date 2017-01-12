@@ -280,8 +280,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Players rating
 --- !u!222 &516051414
@@ -303,10 +303,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 813671458}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0, y: 0.8973979}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00021362305, y: -2.5}
-  m_SizeDelta: {x: -286.52002, y: -20}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.00022126, y: -40}
+  m_SizeDelta: {x: 687.48, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &675656529
 GameObject:
@@ -553,7 +553,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -670, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &963763690
 MonoBehaviour:
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 1741964061, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
+  m_HorizontalFit: 0
   m_VerticalFit: 2
 --- !u!114 &963763691
 MonoBehaviour:
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: -120
+    m_Left: 0
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -728,8 +728,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0011568, y: 16}
-  m_SizeDelta: {x: 702.57, y: 351}
+  m_AnchoredPosition: {x: 0.0005187988, y: 2}
+  m_SizeDelta: {x: 687, y: 329}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1111348957
 GameObject:
@@ -1033,8 +1033,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 512, y: -94}
-  m_SizeDelta: {x: 702.57, y: 30}
+  m_AnchoredPosition: {x: 500.99976, y: -99.01251}
+  m_SizeDelta: {x: 687.48, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1471600583
 MonoBehaviour:
@@ -1393,10 +1393,10 @@ RectTransform:
   - {fileID: 2057095087}
   m_Father: {fileID: 813671458}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0.3, y: 0.03439781}
-  m_AnchorMax: {x: 0.68982065, y: 0.163}
-  m_AnchoredPosition: {x: 5, y: 1}
-  m_SizeDelta: {x: -111, y: -27}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 73}
+  m_SizeDelta: {x: 269, y: 67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1836335936
 GameObject:

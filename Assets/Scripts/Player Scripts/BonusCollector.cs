@@ -96,9 +96,8 @@ public class BonusCollector : Photon.PunBehaviour
 
         if (col.tag == "SpeedBooster")
         {
-            if (pc.photonView.isMine && !pc.isBot && PlayerInfo.TitleUserData.ContainsKey("speed"))
+            if (PlayerInfo.TitleUserData.ContainsKey("speed"))
                 improvement = float.Parse(PlayerInfo.TitleUserData["speed"]) / 100f;
-            Debug.Log(improvement);
             float coefficient = col.GetComponent<BoostProperties>().boostCoefficient + improvement;
             float timeOfAction = col.GetComponent<BoostProperties>().time;
             SendMessage("BoostSpeed", coefficient);
@@ -108,9 +107,8 @@ public class BonusCollector : Photon.PunBehaviour
 
         if (col.tag == "JumpBooster")
         {
-            if (pc.photonView.isMine && !pc.isBot && PlayerInfo.TitleUserData.ContainsKey("jump"))
+            if (PlayerInfo.TitleUserData.ContainsKey("jump"))
                 improvement = float.Parse(PlayerInfo.TitleUserData["jump"]) / 100f;
-            Debug.Log(improvement);
             float coefficient = col.GetComponent<BoostProperties>().boostCoefficient + improvement;
             float timeOfAction = col.GetComponent<BoostProperties>().time;
             SendMessage("BoostJump", coefficient);
@@ -119,9 +117,8 @@ public class BonusCollector : Photon.PunBehaviour
         }
         if (col.tag == "MoneyBonus")
         {
-            if (pc.photonView.isMine && !pc.isBot && PlayerInfo.TitleUserData.ContainsKey("moneybonus"))
+            if (PlayerInfo.TitleUserData.ContainsKey("moneybonus"))
                 improvement = float.Parse(PlayerInfo.TitleUserData["moneybonus"]);
-            Debug.Log(improvement);
             _moneyCoeff = col.GetComponent<BoostProperties>().boostCoefficient;
             _moneyBonusTime = col.GetComponent<BoostProperties>().time + improvement;
             Destroy(col.gameObject);
@@ -142,9 +139,8 @@ public class BonusCollector : Photon.PunBehaviour
 
         if (col.tag == "Shield")
         {
-            if (pc.photonView.isMine && !pc.isBot && PlayerInfo.TitleUserData.ContainsKey("shield"))
+            if (PlayerInfo.TitleUserData.ContainsKey("shield"))
                 improvement = float.Parse(PlayerInfo.TitleUserData["shield"]);
-            Debug.Log(improvement);
             _shieldTime = col.GetComponent<BoostProperties>().time + improvement;
             _stats.IsImmortaled = true;
             Destroy(col.gameObject);

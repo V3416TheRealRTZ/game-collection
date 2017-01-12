@@ -335,30 +335,6 @@ MonoBehaviour:
   priceText: {fileID: 114000011937772546}
   buyButton: {fileID: 114000013970538936}
   itemId: 
-  itemClass: 
-  catalogItem:
-    ItemId: 
-    ItemClass: 
-    CatalogVersion: 
-    DisplayName: 
-    Description: 
-    Tags: []
-    CustomData: 
-    Consumable:
-      UsagePeriodGroup: 
-    Container:
-      KeyItemId: 
-      ItemContents: []
-      ResultTableContents: []
-    Bundle:
-      BundledItems: []
-      BundledResultTables: []
-    CanBecomeCharacter: 0
-    IsStackable: 0
-    IsTradable: 0
-    ItemImageUrl: 
-    IsLimitedEdition: 0
-    InitialLimitedEditionCount: 0
 --- !u!114 &114000011937772546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -500,7 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: 250
-  m_MinHeight: 90
+  m_MinHeight: 130
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
