@@ -13,12 +13,10 @@ public class Login : Photon.MonoBehaviour {
     public InputField _usernameField;
     public InputField _passwordField;
     public Toggle _remember;
-    public Text versionText;
 
     private Text _loginStatus;
     // Use this for initialization
     void Start () {
-        versionText.text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         PhotonNetwork.autoJoinLobby = false;
         PhotonNetwork.ConnectUsingSettings(version);
         _loginStatus = GameObject.Find("Status").GetComponent<Text>();

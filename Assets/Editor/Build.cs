@@ -21,7 +21,11 @@ public class Build
                      .Where(fileName => !fileName.Contains(".meta"))
                      .Select(fileName => fileName)
                      .ToArray();
-        BuildPipeline.BuildPlayer(levels, path + "\\BuiltGame ver " + version + ".exe", BuildTarget.StandaloneWindows, BuildOptions.Development);
+        PlayerSettings.productName = PlayerSettings.productName + " ver " + version;
+        PlayerSettings.defaultIsFullScreen = false;
+        PlayerSettings.defaultScreenHeight = 768;
+        PlayerSettings.defaultScreenWidth = 1024;
+        BuildPipeline.BuildPlayer(levels, path + "\\BuiltGame ver " + version + ".exe", BuildTarget.StandaloneWindows, BuildOptions.None);
         using (var writer = new StreamWriter(path + "\\build info.txt"))
         {
             writer.WriteLine("build version: " + version);
