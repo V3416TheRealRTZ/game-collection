@@ -21,7 +21,7 @@ public class Build
                      .Where(fileName => !fileName.Contains(".meta"))
                      .Select(fileName => fileName)
                      .ToArray();
-        PlayerSettings.productName = PlayerSettings.productName + " ver " + version;
+        PlayerSettings.productName = "Runner ver " + version;
         PlayerSettings.defaultIsFullScreen = false;
         PlayerSettings.defaultScreenHeight = 768;
         PlayerSettings.defaultScreenWidth = 1024;
