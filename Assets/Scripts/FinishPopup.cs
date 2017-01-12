@@ -92,7 +92,24 @@ public class FinishPopup : Photon.PunBehaviour {
             if (fields[i].playerName == name)
             {
                 fields[i].score = _score;
-                updateTable();
+                    UpdatePlayerStatisticsRequest req = new UpdatePlayerStatisticsRequest()
+                    {
+                        Statistics = new List<StatisticUpdate> { new StatisticUpdate() { StatisticName = "Score", Value = _score } }
+                    };
+                    PlayFabClientAPI.UpdatePlayerStatistics(req, (UpdatePlayerStatisticsResult r) => { PlayerInfo.UpdateScore(); }, (PlayFabError err) => { Debug.Log(err.ErrorMessage); });
+
+                    AddUserVirtualCurrencyRequest reqCur = new AddUserVirtualCurrencyRequest()
+                    {
+                        VirtualCurrency = "GO",
+                        Amount = fields[i].gold,
+                    };
+                    PlayFabClientAPI.AddUserVirtualCurrency(reqCur, (ModifyUserVirtualCurrencyResult res) =>
+                    {
+                        PlayerInfo.Money = res.Balance;
+                        Debug.Log("Money updated for " + res.BalanceChange.ToString() + ". Now money = " + res.Balance.ToString());
+                    },
+                    (PlayFabError err) => Debug.Log(err.ErrorMessage));
+                
                 break;
             }
     }

@@ -12,7 +12,7 @@ public class GameManager : Photon.PunBehaviour {
     private bool _isLeaving = false;
     private int botsCount = 0;
     private GameObject girl;
-    public float addBotTime = 1;
+    public float addBotTime = 10;
     private float _currentTime = 0;
     public bool started = false;
     public bool readyToStart = false;
@@ -73,7 +73,7 @@ public class GameManager : Photon.PunBehaviour {
 
         if (readyToStart)
         {
-            countdownText.gameObject.SetActive(true);
+            
             if (countdown <= 0)
             {
                 countdownText.text = "RUN";
@@ -88,13 +88,21 @@ public class GameManager : Photon.PunBehaviour {
                 else if (countdown <= 2)
                     countdownText.text = "2";
                 else if (countdown <= 3)
+                {
                     countdownText.text = "3";
+                    countdownText.fontSize = 150;
+                }
                 
                 
                     countdown -= Time.deltaTime;
                 
             }
         }
+        else
+        {
+            countdownText.text = "Waiting for players...\n"+(PhotonNetwork.room.playerCount + botsCount).ToString() + " of 4";
+        }
+
         if (started)
             countdownText.gameObject.SetActive(false);
 
@@ -155,7 +163,7 @@ public class GameManager : Photon.PunBehaviour {
                 for (int i = 0; i < 4; i++)
                 {
                     PlayerController pc = places[i].GetComponent<PlayerController>();
-                    if (!pc.isBot && pc.photonView.isMine)
+                    /*if (!pc.isBot && pc.photonView.isMine)
                     {
                         UpdatePlayerStatisticsRequest req = new UpdatePlayerStatisticsRequest()
                         {
@@ -174,9 +182,9 @@ public class GameManager : Photon.PunBehaviour {
                             Debug.Log("Money updated for " + res.BalanceChange.ToString() + ". Now money = " + res.Balance.ToString());
                         },
                         (PlayFabError err) => Debug.Log(err.ErrorMessage));
-                    }
+                    }*/
 
-                Debug.Log("before set new score");
+                    Debug.Log("before set new score");
 
                     finishPopup.photonView.RPC("setNewScore", PhotonTargets.All, pl[i], pc.PlayerName);
                     
