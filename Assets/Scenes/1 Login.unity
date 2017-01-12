@@ -328,6 +328,7 @@ MonoBehaviour:
   _usernameField: {fileID: 1233611781}
   _passwordField: {fileID: 1058904290}
   _remember: {fileID: 1781213229}
+  versionText: {fileID: 1555418235}
 --- !u!224 &763688406
 RectTransform:
   m_ObjectHideFlags: 0
